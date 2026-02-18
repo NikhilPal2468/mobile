@@ -1,3 +1,13 @@
+pluginManagement {
+  repositories {
+    // Needed for Expo modules Gradle plugin (expo-module-gradle-plugin)
+    includeBuild("../node_modules/expo-modules-core/android")
+    gradlePluginPortal()
+    mavenCentral()
+    google()
+  }
+}
+
 rootProject.name = 'School Admission'
 
 dependencyResolutionManagement {
