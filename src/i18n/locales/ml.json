@@ -1,0 +1,226 @@
+{
+  "common": {
+    "next": "അടുത്തത്",
+    "back": "പിന്നോക്കം",
+    "save": "സേവ് ചെയ്യുക",
+    "submit": "സമർപ്പിക്കുക",
+    "cancel": "റദ്ദാക്കുക",
+    "close": "അടയ്ക്കുക",
+    "continue": "തുടരുക",
+    "edit": "എഡിറ്റ് ചെയ്യുക",
+    "delete": "ഇല്ലാതാക്കുക",
+    "clear": "മായ്ക്കുക",
+    "loading": "ലോഡ് ചെയ്യുന്നു...",
+    "error": "പിശക്",
+    "success": "വിജയം"
+  },
+  "auth": {
+    "phoneNumber": "ഫോൺ നമ്പർ",
+    "enterPhone": "നിങ്ങളുടെ 10 അക്ക ഫോൺ നമ്പർ നൽകുക",
+    "sendOTP": "OTP അയയ്ക്കുക",
+    "enterOTP": "OTP നൽകുക",
+    "verifyOTP": "OTP പരിശോധിക്കുക",
+    "resendOTP": "OTP വീണ്ടും അയയ്ക്കുക",
+    "invalidPhone": "സാധുവായ 10 അക്ക ഫോൺ നമ്പർ നൽകുക",
+    "invalidOTP": "സാധുവല്ലാത്ത OTP. വീണ്ടും ശ്രമിക്കുക."
+  },
+  "tabs": {
+    "home": "ഹോം",
+    "admission": "സ്കൂൾ പ്രവേശനം",
+    "explore": "എക്സ്പ്ലോർ",
+    "profile": "പ്രൊഫൈൽ"
+  },
+  "home": {
+    "welcome": "സ്വാഗതം",
+    "resumeDraft": "ഡ്രാഫ്റ്റ് തുടരുക",
+    "recentUpdates": "ഇപ്പോഴത്തെ അപ്ഡേറ്റുകൾ",
+    "noDraft": "ഡ്രാഫ്റ്റ് അപ്ലിക്കേഷൻ കണ്ടെത്തിയില്ല"
+  },
+  "admission": {
+    "title": "സ്കൂൾ പ്രവേശനം",
+    "description": "സ്കൂൾ പ്രവേശനത്തിനായി കേരള HSCAP Appendix-8 ഫോം പൂരിപ്പിക്കുക",
+    "startApplication": "അപ്ലിക്കേഷൻ ആരംഭിക്കുക",
+    "resumeApplication": "അപ്ലിക്കേഷൻ തുടരുക",
+    "step": "ഘട്ടം",
+    "of": "ന്റെ",
+    "noApplication": "അപ്ലിക്കേഷൻ കണ്ടെത്തിയില്ല",
+    "tapToStart": "പുതിയ അപ്ലിക്കേഷൻ ആരംഭിക്കാൻ ഇവിടെ ടാപ്പ് ചെയ്യുക",
+    "startDescription": "നിങ്ങളുടെ സ്കൂൾ പ്രവേശന ഫോം പൂരിപ്പിക്കാൻ ആരംഭിക്കുക",
+    "draftApplication": "ഡ്രാഫ്റ്റ് അപ്ലിക്കേഷൻ",
+    "applicationSubmitted": "അപ്ലിക്കേഷൻ സമർപ്പിച്ചു",
+    "statusPending": "തീർച്ചപ്പെടുത്താനുള്ളത്",
+    "statusVerified": "പരിശോധിച്ചു",
+    "statusRejected": "നിരസിച്ചു",
+    "statusDraft": "ഡ്രാഫ്റ്റ്",
+    "applicantName": "അപേക്ഷകന്റെ പേര്",
+    "applicationId": "അപ്ലിക്കേഷൻ ID",
+    "submittedAt": "സമർപ്പിച്ച തീയതി",
+    "viewApplication": "അപ്ലിക്കേഷൻ കാണുക",
+    "editApplication": "അപ്ലിക്കേഷൻ എഡിറ്റ് ചെയ്യുക",
+    "viewPDF": "PDF കാണുക",
+    "pdfNotAvailable": "PDF ഇതുവരെ ലഭ്യമല്ല",
+    "pdfNotAvailableHint": "ഫോമിൽ നിന്ന് (Preview PDF) ജനറേറ്റ് ചെയ്യുക അല്ലെങ്കിൽ പിന്നീട് വീണ്ടും ശ്രമിക്കുക.",
+    "pdfNotGeneratedYet": "PDF ഇതുവരെ ജനറേറ്റ് ചെയ്തിട്ടില്ല. ഫോമിൽ Preview PDF ഉപയോഗിക്കുക.",
+    "pdfError": "PDF ലോഡ് ചെയ്യുന്നതിൽ പിശക്",
+    "noApplicationData": "അപ്ലിക്കേഷൻ ഡാറ്റ കണ്ടെത്തിയില്ല",
+    "documents": "പ്രമാണങ്ങൾ"
+  },
+  "form": {
+    "step1": {
+      "title": "യോഗ്യതാ പരീക്ഷ",
+      "examCode": "പരീക്ഷ കോഡ്",
+      "examName": "പരീക്ഷ പേര്",
+      "registerNumber": "രജിസ്റ്റർ നമ്പർ",
+      "passingMonth": "പാസ് ചെയ്ത മാസം",
+      "passingYear": "പാസ് ചെയ്ത വർഷം",
+      "schoolCode": "സ്കൂൾ കോഡ്",
+      "schoolName": "സ്കൂൾ പേര്",
+      "passedBoardExam": "ബോർഡ് പരീക്ഷ പാസ് ചെയ്തു"
+    },
+    "step2": {
+      "title": "അപേക്ഷകന്റെ വിവരങ്ങൾ",
+      "name": "പേര് (ബ്ലോക്ക് അക്ഷരങ്ങൾ)",
+      "aadhaarNumber": "ആധാർ നമ്പർ",
+      "gender": "ലിംഗം",
+      "category": "വിഭാഗം",
+      "categoryCode": "വിഭാഗം കോഡ്",
+      "ewsEligible": "EWS യോഗ്യത",
+      "caste": "ജാതി",
+      "religion": "മതം",
+      "dateOfBirth": "ജനന തീയതി",
+      "motherName": "അമ്മയുടെ പേര്",
+      "fatherName": "അച്ഛന്റെ പേര്",
+      "guardianName": "അഭിരക്ഷകന്റെ പേര്"
+    },
+    "step3": {
+      "title": "സംവരണവും പ്രത്യേക വിഭാഗങ്ങളും",
+      "oec": "OEC (മറ്റ് യോഗ്യതയുള്ള വിഭാഗം)",
+      "linguisticMinority": "ഭാഷാ ന്യൂനപക്ഷം",
+      "linguisticLanguage": "ഭാഷ",
+      "differentlyAbled": "വ്യത്യസ്ത കഴിവുകൾ",
+      "differentlyAbledPercentage": "ശതമാനം"
+    },
+    "step4": {
+      "title": "വാസസ്ഥലവും വിലാസവും",
+      "nativeState": "സ്വദേശം",
+      "nativeDistrict": "സ്വദേശ ജില്ല",
+      "nativeTaluk": "താലൂക്ക്",
+      "nativePanchayat": "പഞ്ചായത്ത്",
+      "permanentAddress": "സ്ഥിര വിലാസം",
+      "communicationAddress": "ആശയവിനിമയ വിലാസം",
+      "phone": "ഫോൺ",
+      "email": "ഇമെയിൽ"
+    },
+    "step5": {
+      "title": "ഗ്രേസ് / ബോണസ് മാർക്കുകൾ",
+      "graceMarks": "ഗ്രേസ് മാർക്കുകൾ",
+      "ncc": "NCC",
+      "scouts": "സ്കൗട്ടുകൾ",
+      "spc": "SPC",
+      "defenceDependent": "പ്രതിരോധ ആശ്രിതൻ",
+      "littleKitesGrade": "ലിറ്റിൽ കൈറ്റ്സ് ഗ്രേഡ്"
+    },
+    "step6": {
+      "title": "കായിക പങ്കാളിത്തം",
+      "stateCount": "സംസ്ഥാന തലം എണ്ണം",
+      "districtFirst": "ജില്ല 1-ാം സ്ഥാനം",
+      "districtSecond": "ജില്ല 2-ാം സ്ഥാനം",
+      "districtThird": "ജില്ല 3-ാം സ്ഥാനം",
+      "districtParticipation": "ജില്ല പങ്കാളിത്തം",
+      "certificateUpload": "സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക"
+    },
+    "step7": {
+      "title": "കലോത്സവം",
+      "stateCount": "സംസ്ഥാന പങ്കാളിത്തം എണ്ണം",
+      "districtA": "ജില്ല ഗ്രേഡ് A",
+      "districtB": "ജില്ല ഗ്രേഡ് B",
+      "districtC": "ജില്ല ഗ്രേഡ് C",
+      "districtParticipation": "ജില്ല പങ്കാളിത്തം",
+      "certificateUpload": "സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക"
+    },
+    "step8": {
+      "title": "വിദ്യാഭ്യാസ സമ്മാനങ്ങൾ",
+      "ntse": "NTSE",
+      "nmms": "NMMS",
+      "uss": "USS",
+      "lss": "LSS",
+      "certificateUpload": "സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക"
+    },
+    "step9": {
+      "title": "സഹ-പാഠ്യപ്രവർത്തനങ്ങൾ",
+      "scienceFairGrade": "സയൻസ് ഫെയർ ഗ്രേഡ്",
+      "mathsFairGrade": "മാത്ത് ഫെയർ ഗ്രേഡ്",
+      "itFairGrade": "IT ഫെയർ ഗ്രേഡ്",
+      "workExperienceGrade": "ജോലി അനുഭവം ഗ്രേഡ്",
+      "clubs": "ക്ലബുകൾ"
+    },
+    "step10": {
+      "title": "SSLC ശ്രമങ്ങളും മാർക്കുകളും",
+      "attempts": "ശ്രമങ്ങളുടെ എണ്ണം",
+      "previousAttempts": "മുമ്പത്തെ ശ്രമങ്ങൾ",
+      "subjectGrades": "വിഷയ-വിഷയ ഗ്രേഡുകൾ"
+    },
+    "step11": {
+      "title": "സ്കൂളും കോമ്പിനേഷനും പ്രാധാന്യങ്ങൾ",
+      "preference": "പ്രാധാന്യം",
+      "schoolCode": "സ്കൂൾ കോഡ്",
+      "combinationCode": "കോമ്പിനേഷൻ കോഡ്",
+      "addPreference": "പ്രാധാന്യം ചേർക്കുക",
+      "removePreference": "നീക്കം ചെയ്യുക"
+    },
+    "step12": {
+      "title": "പ്രമാണം അപ്ലോഡ്",
+      "aadhaar": "ആധാർ കാർഡ്",
+      "sslcMarksheet": "SSLC മാർക്ക് ഷീറ്റ്",
+      "categoryCertificate": "വിഭാഗം സർട്ടിഫിക്കറ്റ്",
+      "reservationCertificate": "സംവരണ സർട്ടിഫിക്കറ്റ്",
+      "sportsCertificate": "കായിക സർട്ടിഫിക്കറ്റ്",
+      "kalolsavamCertificate": "കലോത്സവം സർട്ടിഫിക്കറ്റ്",
+      "scholarshipCertificate": "വിദ്യാഭ്യാസ സമ്മാനം സർട്ടിഫിക്കറ്റ്",
+      "disabilityCertificate": "വൈകല്യ സർട്ടിഫിക്കറ്റ്",
+      "uploadDocument": "പ്രമാണം അപ്ലോഡ് ചെയ്യുക",
+      "requiredBecauseCategory": "നിങ്ങൾ ഒരു വിഭാഗം തിരഞ്ഞെടുത്തതിനാൽ ആവശ്യമാണ്.",
+      "requiredBecauseReservation": "EWS അല്ലെങ്കിൽ സംവരണം സൂചിപ്പിച്ചതിനാൽ ആവശ്യമാണ്.",
+      "requiredBecauseSports": "കായിക പങ്കാളിത്തം സൂചിപ്പിച്ചതിനാൽ ആവശ്യമാണ്.",
+      "requiredBecauseKalolsavam": "കലോത്സവ പങ്കാളിത്തം സൂചിപ്പിച്ചതിനാൽ ആവശ്യമാണ്.",
+      "requiredBecauseScholarship": "വിദ്യാഭ്യാസ സമ്മാന യോഗ്യത സൂചിപ്പിച്ചതിനാൽ ആവശ്യമാണ്.",
+      "requiredBecauseDisability": "വ്യത്യസ്ത കഴിവുകൾ സൂചിപ്പിച്ചതിനാൽ ആവശ്യമാണ്."
+    },
+    "step13": {
+      "title": "പ്രഖ്യാപനവും പ്രിവ്യൂവും",
+      "applicantSignature": "അപേക്ഷകന്റെ ഒപ്പ്",
+      "parentSignature": "മാതാപിതാക്കൾ/അഭിരക്ഷകന്റെ ഒപ്പ്",
+      "drawSignature": "ഒപ്പ് വരയ്ക്കുക",
+      "uploadSignature": "ഒപ്പ് അപ്ലോഡ് ചെയ്യുക",
+      "disclaimer": "ഈ ആപ്പ് ഫോം പൂരിപ്പിക്കാൻ സഹായിക്കുന്നു എന്ന് ഞാൻ മനസ്സിലാക്കുന്നു; അവസാന പ്രവേശനം HSCAP-നെ ആശ്രയിച്ചിരിക്കുന്നു.",
+      "acceptDisclaimer": "ഞാൻ പ്രഖ്യാപനം സ്വീകരിക്കുന്നു",
+      "previewPDF": "PDF പ്രിവ്യൂ",
+      "finalSubmit": "അവസാന സമർപ്പണം"
+    }
+  },
+  "explore": {
+    "title": "എക്സ്പ്ലോർ",
+    "blogs": "ബ്ലോഗുകൾ",
+    "videos": "വീഡിയോകൾ",
+    "categories": "വിഭാഗങ്ങൾ",
+    "readMore": "കൂടുതൽ വായിക്കുക",
+    "watchVideo": "വീഡിയോ കാണുക",
+    "openInBrowser": "ബ്രൗസറിൽ തുറക്കുക"
+  },
+  "profile": {
+    "title": "പ്രൊഫൈൽ",
+    "userInfo": "ഉപയോക്തൃ വിവരങ്ങൾ",
+    "phone": "ഫോൺ",
+    "name": "പേര്",
+    "language": "ഭാഷ",
+    "english": "ഇംഗ്ലീഷ്",
+    "malayalam": "മലയാളം",
+    "logout": "ലോഗൗട്ട്",
+    "logoutConfirm": "ലോഗൗട്ട് ചെയ്യാൻ ഉറപ്പാണോ?"
+  },
+  "ai": {
+    "assistant": "AI അസിസ്റ്റന്റ്",
+    "askQuestion": "ഒരു ചോദ്യം ചോദിക്കുക...",
+    "send": "അയയ്ക്കുക"
+  }
+}

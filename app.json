@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Helpdesk",
+    "slug": "helpdesk",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rzwan.helpdesk"
+    },
+    "android": {
+      "package": "com.rzwan.helpdesk"
+    },
+    "web": {},
+    "plugins": [
+      "expo-font"
+    ],
+    "scheme": "schooladmission",
+    "extra": {
+      "eas": {
+        "projectId": "865db1ef-1561-40dc-bcfc-662e3b021e4a"
+      }
+    }
+  }
+}

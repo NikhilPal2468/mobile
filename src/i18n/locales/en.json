@@ -1,0 +1,229 @@
+{
+  "common": {
+    "next": "Next",
+    "back": "Back",
+    "save": "Save",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "continue": "Continue",
+    "edit": "Edit",
+    "delete": "Delete",
+    "clear": "Clear",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "auth": {
+    "phoneNumber": "Phone Number",
+    "enterPhone": "Enter your 10-digit phone number",
+    "sendOTP": "Send OTP",
+    "enterOTP": "Enter OTP",
+    "verifyOTP": "Verify OTP",
+    "resendOTP": "Resend OTP",
+    "invalidPhone": "Please enter a valid 10-digit phone number",
+    "invalidOTP": "Invalid OTP. Please try again."
+  },
+  "tabs": {
+    "home": "Home",
+    "admission": "School Admission",
+    "explore": "Explore",
+    "profile": "Profile"
+  },
+  "home": {
+    "welcome": "Welcome",
+    "resumeDraft": "Resume Draft",
+    "recentUpdates": "Recent Updates",
+    "noDraft": "No draft application found"
+  },
+  "admission": {
+    "title": "School Admission",
+    "description": "Fill out the Kerala HSCAP Appendix-8 form for school admission",
+    "startApplication": "Start Application",
+    "resumeApplication": "Resume Application",
+    "step": "Step",
+    "of": "of",
+    "noApplication": "No Application Found",
+    "tapToStart": "Tap here to start a new application",
+    "startDescription": "Start filling out your school admission form",
+    "draftApplication": "Draft Application",
+    "applicationSubmitted": "Application Submitted",
+    "statusPending": "Pending",
+    "statusVerified": "Verified",
+    "statusRejected": "Rejected",
+    "statusDraft": "Draft",
+    "applicantName": "Applicant Name",
+    "applicationId": "Application ID",
+    "submittedAt": "Submitted At",
+    "viewApplication": "View Application",
+    "editApplication": "Edit Application",
+    "viewPDF": "View PDF",
+    "pdfNotAvailable": "PDF not available yet",
+    "pdfNotAvailableHint": "Generate it from the form (Preview PDF) or try again later.",
+    "pdfNotGeneratedYet": "PDF has not been generated yet. Use Preview PDF in the form first.",
+    "pdfError": "Error loading PDF",
+    "noApplicationData": "No application data found",
+    "documents": "Documents"
+  },
+  "form": {
+    "step1": {
+      "title": "Qualifying Examination",
+      "examCode": "Exam Code",
+      "examName": "Exam Name",
+      "registerNumber": "Register Number",
+      "passingMonth": "Passing Month",
+      "passingYear": "Passing Year",
+      "schoolCode": "School Code",
+      "schoolName": "School Name",
+      "passedBoardExam": "Passed Board Exam"
+    },
+    "step2": {
+      "title": "Applicant Details",
+      "name": "Name (Block letters)",
+      "aadhaarNumber": "Aadhaar Number",
+      "gender": "Gender",
+      "category": "Category",
+      "categoryCode": "Category Code",
+      "ewsEligible": "EWS Eligible",
+      "caste": "Caste",
+      "religion": "Religion",
+      "dateOfBirth": "Date of Birth",
+      "motherName": "Mother's Name",
+      "fatherName": "Father's Name",
+      "guardianName": "Guardian's Name"
+    },
+    "step3": {
+      "title": "Reservation & Special Categories",
+      "oec": "OEC (Other Eligible Category)",
+      "linguisticMinority": "Linguistic Minority",
+      "linguisticLanguage": "Language",
+      "differentlyAbled": "Differently Abled",
+      "differentlyAbledPercentage": "Percentage"
+    },
+    "step4": {
+      "title": "Residence & Address",
+      "nativeState": "Native State",
+      "nativeDistrict": "Native District",
+      "nativeTaluk": "Taluk",
+      "nativePanchayat": "Panchayat",
+      "permanentAddress": "Permanent Address",
+      "communicationAddress": "Communication Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "step5": {
+      "title": "Grace / Bonus Marks",
+      "graceMarks": "Grace Marks",
+      "ncc": "NCC",
+      "scouts": "Scouts",
+      "spc": "SPC",
+      "defenceDependent": "Defence Dependent",
+      "littleKitesGrade": "Little Kites Grade"
+    },
+    "step6": {
+      "title": "Sports Participation",
+      "stateCount": "State Level Count",
+      "districtFirst": "District 1st Place",
+      "districtSecond": "District 2nd Place",
+      "districtThird": "District 3rd Place",
+      "districtParticipation": "District Participation",
+      "certificateUpload": "Upload Certificate"
+    },
+    "step7": {
+      "title": "Kalolsavam",
+      "stateCount": "State Participation Count",
+      "districtA": "District Grade A",
+      "districtB": "District Grade B",
+      "districtC": "District Grade C",
+      "districtParticipation": "District Participation",
+      "certificateUpload": "Upload Certificate"
+    },
+    "step8": {
+      "title": "Scholarships",
+      "ntse": "NTSE",
+      "nmms": "NMMS",
+      "uss": "USS",
+      "lss": "LSS",
+      "certificateUpload": "Upload Certificate"
+    },
+    "step9": {
+      "title": "Co-curricular",
+      "scienceFairGrade": "Science Fair Grade",
+      "mathsFairGrade": "Maths Fair Grade",
+      "itFairGrade": "IT Fair Grade",
+      "workExperienceGrade": "Work Experience Grade",
+      "clubs": "Clubs"
+    },
+    "step10": {
+      "title": "SSLC Attempts & Marks",
+      "attempts": "Number of Attempts",
+      "previousAttempts": "Previous Attempts",
+      "subjectGrades": "Subject-wise Grades"
+    },
+    "step11": {
+      "title": "School & Combination Preferences",
+      "preference": "Preference",
+      "schoolCode": "School Code",
+      "combinationCode": "Combination Code",
+      "addPreference": "Add Preference",
+      "removePreference": "Remove"
+    },
+    "step12": {
+      "title": "Document Upload",
+      "aadhaar": "Aadhaar Card",
+      "sslcMarksheet": "SSLC Marksheet",
+      "categoryCertificate": "Category Certificate",
+      "reservationCertificate": "Reservation Certificate",
+      "sportsCertificate": "Sports Certificate",
+      "kalolsavamCertificate": "Kalolsavam Certificate",
+      "scholarshipCertificate": "Scholarship Certificate",
+      "disabilityCertificate": "Disability Certificate",
+      "uploadDocument": "Upload Document",
+      "requiredBecauseCategory": "Required because you selected a category.",
+      "requiredBecauseReservation": "Required because you indicated EWS or reservation.",
+      "requiredBecauseSports": "Required because you indicated sports participation.",
+      "requiredBecauseKalolsavam": "Required because you indicated Kalolsavam participation.",
+      "requiredBecauseScholarship": "Required because you indicated scholarship qualification.",
+      "requiredBecauseDisability": "Required because you indicated differently abled."
+    },
+    "step13": {
+      "title": "Declaration & Preview",
+      "applicantSignature": "Applicant Signature",
+      "parentSignature": "Parent/Guardian Signature",
+      "drawSignature": "Draw Signature",
+      "uploadSignature": "Upload Signature",
+      "disclaimer": "I understand that this app assists form filling; final admission depends on HSCAP.",
+      "acceptDisclaimer": "I accept the disclaimer",
+      "previewPDF": "Preview PDF",
+      "finalSubmit": "Final Submit"
+    }
+  },
+  "explore": {
+    "title": "Explore",
+    "blogs": "Blogs",
+    "videos": "Videos",
+    "categories": "Categories",
+    "readMore": "Read More",
+    "watchVideo": "Watch Video",
+    "openInBrowser": "Open in Browser"
+  },
+  "profile": {
+    "title": "Profile",
+    "userInfo": "User Information",
+    "phone": "Phone",
+    "name": "Name",
+    "language": "Language",
+    "english": "English",
+    "malayalam": "Malayalam",
+    "logout": "Logout",
+    "logoutConfirm": "Are you sure you want to logout?"
+  },
+  "ai": {
+    "assistant": "AI Assistant",
+    "askQuestion": "Ask a question...",
+    "send": "Send",
+    "explainField": "Explain this field",
+    "explainEligibility": "Explain eligibility",
+    "helpWithForm": "Help with form filling"
+  }
+}

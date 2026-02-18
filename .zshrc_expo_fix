@@ -1,0 +1,4 @@
+# Temporary fix for Expo/CocoaPods - add to your ~/.zshrc
+# Unset RVM for CocoaPods
+unset GEM_HOME GEM_PATH
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
