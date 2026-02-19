@@ -26,22 +26,24 @@ const original = content;
 
 // 1) buildscript: add google() and AGP classpath (tolerate any whitespace)
 if (!content.includes('google()')) {
+  // Keep leading newline so "  }" and "  repositories {" stay on separate lines
   content = content.replace(
-    /\s+repositories\s*\{\s*\n\s*mavenCentral\(\)/,
-    '  repositories {\n    google()\n    mavenCentral()'
+    /(\n\s*)repositories\s*\{\s*\n\s*mavenCentral\(\)/,
+    '$1repositories {\n    google()\n    mavenCentral()'
   );
   content = content.replace(
-    /\s+dependencies\s*\{\s*\n\s*classpath\("org\.jetbrains\.kotlin:kotlin-gradle-plugin:\$\{getKotlinVersion\(\)\}"\)/,
-    '  dependencies {\n    classpath("com.android.tools.build:gradle:8.1.1")\n    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${getKotlinVersion()}")'
+    /(\n\s*)dependencies\s*\{\s*\n\s*classpath\("org\.jetbrains\.kotlin:kotlin-gradle-plugin:\$\{getKotlinVersion\(\)\}"\)/,
+    '$1dependencies {\n    classpath("com.android.tools.build:gradle:8.1.1")\n    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${getKotlinVersion()}")'
   );
 }
 
 // 2) After buildscript, add rootProject.ext defaults for composite build
 if (!content.includes('rootProject.ext.compileSdkVersion = 34')) {
-  // Buildscript has 2 closing braces (dependencies }, buildscript }) then "def isExpoModulesCoreTests"
+  // Keep the 2 closing braces (dependencies }, buildscript }), then insert our block before "def isExpoModulesCoreTests"
   content = content.replace(
     /\}\s*\n\s*\}\s*\n\s*def isExpoModulesCoreTests = \{/,
-    `}
+    `  }
+}
 
 // When used as composite build (includeBuild), root has no ext from main project; set defaults so compileSdkVersion etc. are defined
 if (!rootProject.ext.has("compileSdkVersion")) {
@@ -52,11 +54,12 @@ if (!rootProject.ext.has("compileSdkVersion")) {
 
 def isExpoModulesCoreTests = {`
   );
-  // Fallback: single } before "def isExpoModulesCoreTests" (in case buildscript format differs)
+  // Fallback: single } before "def" (keep that brace, then insert block)
   if (!content.includes('rootProject.ext.compileSdkVersion = 34')) {
     content = content.replace(
       /\}\s*\n\s*def isExpoModulesCoreTests = \{/,
       `}
+}
 
 // When used as composite build (includeBuild), root has no ext from main project; set defaults so compileSdkVersion etc. are defined
 if (!rootProject.ext.has("compileSdkVersion")) {
