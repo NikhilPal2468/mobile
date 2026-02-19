@@ -22,6 +22,8 @@ if (!fs.existsSync(buildGradlePath)) {
 }
 
 let content = fs.readFileSync(buildGradlePath, 'utf8');
+// Normalize line endings so regex and string match work on any platform (EAS is Linux, but npm tarball can vary)
+content = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 const original = content;
 
 // 1) buildscript: add google() and AGP classpath (tolerate any whitespace)
@@ -39,43 +41,51 @@ if (!content.includes('google()')) {
 
 // 2) After buildscript, add rootProject.ext defaults for composite build
 if (!content.includes('rootProject.ext.compileSdkVersion = 34')) {
-  // Keep the 2 closing braces (dependencies }, buildscript }), then insert our block before "def isExpoModulesCoreTests"
-  content = content.replace(
-    /\}\s*\n\s*\}\s*\n\s*def isExpoModulesCoreTests = \{/,
+  const block = `
+// When used as composite build (includeBuild), root has no ext from main project; set defaults so compileSdkVersion etc. are defined
+if (!rootProject.ext.has("compileSdkVersion")) {
+  rootProject.ext.compileSdkVersion = 34
+  rootProject.ext.minSdkVersion = 23
+  rootProject.ext.targetSdkVersion = 34
+}
+
+def isExpoModulesCoreTests = {`;
+  // Match 2 closing braces then "def isExpoModulesCoreTests = {" (allow any line break and optional spaces)
+  const replaced = content.replace(
+    /\}\s*\n\s*\}\s*\n\s*def\s+isExpoModulesCoreTests\s*=\s*\{/,
     `  }
-}
-
-// When used as composite build (includeBuild), root has no ext from main project; set defaults so compileSdkVersion etc. are defined
-if (!rootProject.ext.has("compileSdkVersion")) {
-  rootProject.ext.compileSdkVersion = 34
-  rootProject.ext.minSdkVersion = 23
-  rootProject.ext.targetSdkVersion = 34
-}
-
-def isExpoModulesCoreTests = {`
+}${block}`
   );
-  // Fallback: single } before "def" (keep that brace, then insert block)
+  if (replaced !== content) content = replaced;
+  // Fallback: single } before "def"
   if (!content.includes('rootProject.ext.compileSdkVersion = 34')) {
-    content = content.replace(
-      /\}\s*\n\s*def isExpoModulesCoreTests = \{/,
+    const rep2 = content.replace(
+      /\}\s*\n\s*def\s+isExpoModulesCoreTests\s*=\s*\{/,
       `}
-}
-
-// When used as composite build (includeBuild), root has no ext from main project; set defaults so compileSdkVersion etc. are defined
-if (!rootProject.ext.has("compileSdkVersion")) {
-  rootProject.ext.compileSdkVersion = 34
-  rootProject.ext.minSdkVersion = 23
-  rootProject.ext.targetSdkVersion = 34
-}
-
-def isExpoModulesCoreTests = {`
+}${block}`
     );
+    if (rep2 !== content) content = rep2;
   }
 }
 
 // 3) android block: ensure compileSdkVersion and publishing at top (so "release" component exists and compileSdkVersion is set)
-// Exact string from expo-modules-core@1.11.14 npm package (2-space indent)
 if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {')) {
+  const newAndroidBlock = `android {
+  compileSdkVersion safeExtGet("compileSdkVersion", 34)
+  publishing {
+    singleVariant("release") {
+      withSourcesJar()
+    }
+  }
+  // Remove this if and it's contents, when support for SDK49 is dropped
+  if (!safeExtGet("expoProvidesDefaultConfig", false)) {
+    lintOptions {
+      abortOnError false
+    }
+  }
+
+  if (rootProject.hasProperty("ndkPath"))`;
+  // Try exact string first (2-space indent from npm package)
   const oldAndroidBlock = `android {
   // Remove this if and it's contents, when support for SDK49 is dropped
   if (!safeExtGet("expoProvidesDefaultConfig", false)) {
@@ -98,23 +108,12 @@ if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n
   }
 
   if (rootProject.hasProperty("ndkPath"))`;
-  const newAndroidBlock = `android {
-  compileSdkVersion safeExtGet("compileSdkVersion", 34)
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
-    }
-  }
-  // Remove this if and it's contents, when support for SDK49 is dropped
-  if (!safeExtGet("expoProvidesDefaultConfig", false)) {
-    lintOptions {
-      abortOnError false
-    }
-  }
-
-  if (rootProject.hasProperty("ndkPath"))`;
   if (content.includes(oldAndroidBlock)) {
     content = content.replace(oldAndroidBlock, newAndroidBlock);
+  } else {
+    // Fallback: regex that allows flexible whitespace (handles EAS/npm unpack differences)
+    const flexRegex = /android\s*\{\s*\n\s*\/\/ Remove this if[\s\S]*?if\s*\(\s*!safeExtGet\s*\(\s*"expoProvidesDefaultConfig"\s*,\s*false\s*\)\s*\)\s*\{\s*\n\s*compileSdkVersion safeExtGet\("compileSdkVersion",\s*34\)[\s\S]*?singleVariant\s*\(\s*"release"\s*\)[\s\S]*?withSourcesJar\s*\(\s*\)[\s\S]*?lintOptions\s*\{[\s\S]*?abortOnError\s+false\s*\n\s*\}\s*\n\s*\}\s*\n\s*if\s*\(\s*rootProject\.hasProperty\s*\(\s*"ndkPath"\s*\)\s*\)/;
+    content = content.replace(flexRegex, newAndroidBlock);
   }
 }
 
@@ -128,10 +127,15 @@ if (content.includes('namespace "expo.modules"') && !content.includes('minSdkVer
 
 fs.writeFileSync(buildGradlePath, content);
 
-const changed = content !== original;
-const hasFixes = content.includes('google()') && content.includes('rootProject.ext.compileSdkVersion = 34') && content.includes('singleVariant("release")');
-if (changed || hasFixes) {
-  console.log('patch-expo-modules-core: applied EAS composite-build fixes');
+const hasGoogle = content.includes('google()');
+const hasRootExt = content.includes('rootProject.ext.compileSdkVersion = 34');
+const hasPublishing = content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {');
+if (hasGoogle && hasRootExt && hasPublishing) {
+  console.log('patch-expo-modules-core: applied EAS composite-build fixes (google, rootProject.ext, android block)');
 } else {
-  console.warn('patch-expo-modules-core: no changes applied (file may already be patched or format unexpected)');
+  const missing = [];
+  if (!hasGoogle) missing.push('google()');
+  if (!hasRootExt) missing.push('rootProject.ext');
+  if (!hasPublishing) missing.push('android compileSdkVersion/publishing');
+  console.warn('patch-expo-modules-core: incomplete – missing: ' + missing.join(', '));
 }
