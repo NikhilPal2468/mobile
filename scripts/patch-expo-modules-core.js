@@ -38,9 +38,9 @@ if (!content.includes('google()')) {
 
 // 2) After buildscript, add rootProject.ext defaults for composite build
 if (!content.includes('rootProject.ext.compileSdkVersion = 34')) {
-  // Match closing of buildscript (repos }, dependencies }, buildscript } then "def isExpoModulesCoreTests")
+  // Buildscript has 2 closing braces (dependencies }, buildscript }) then "def isExpoModulesCoreTests"
   content = content.replace(
-    /\}\s*\n\s*\}\s*\n\s*\}\s*\n\s*def isExpoModulesCoreTests = \{/,
+    /\}\s*\n\s*\}\s*\n\s*def isExpoModulesCoreTests = \{/,
     `}
 
 // When used as composite build (includeBuild), root has no ext from main project; set defaults so compileSdkVersion etc. are defined
@@ -71,30 +71,31 @@ def isExpoModulesCoreTests = {`
 }
 
 // 3) android block: ensure compileSdkVersion and publishing at top (so "release" component exists and compileSdkVersion is set)
-// Original has nested "if (!safeExtGet(...)) { compileSdkVersion ... defaultConfig ... publishing ... lintOptions }" - we need these at top level.
+// Exact string from expo-modules-core@1.11.14 npm package (2-space indent)
 if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {')) {
-  // Match android { then optional whitespace/comments then "if (!safeExtGet("expoProvidesDefaultConfig"" block with compileSdkVersion, defaultConfig, publishing, lintOptions
-  const androidBlockRegex = /android\s*\{\s*\n\s*\/\/ Remove this if[^]*?if \(!safeExtGet\("expoProvidesDefaultConfig", false\)\)\s*\{\s*\n\s*compileSdkVersion safeExtGet\("compileSdkVersion", 34\)\s*\n\s*\n\s*defaultConfig\s*\{[^]*?minSdkVersion safeExtGet\("minSdkVersion", 23\)\s*\n\s*targetSdkVersion safeExtGet\("targetSdkVersion", 34\)\s*\n\s*\}\s*\n\s*\n\s*publishing\s*\{[^]*?singleVariant\("release"\)[^]*?withSourcesJar\(\)\s*\n\s*\}\s*\n\s*\n\s*lintOptions\s*\{[^]*?abortOnError false\s*\n\s*\}\s*\n\s*\}/;
-  content = content.replace(androidBlockRegex, `android {
-  compileSdkVersion safeExtGet("compileSdkVersion", 34)
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
-    }
-  }
+  const oldAndroidBlock = `android {
   // Remove this if and it's contents, when support for SDK49 is dropped
   if (!safeExtGet("expoProvidesDefaultConfig", false)) {
-    lintOptions {
-      abortOnError false
-    }
-  }
-`);
-}
+    compileSdkVersion safeExtGet("compileSdkVersion", 34)
 
-// If the above big regex didn't match (e.g. different order), try 1-space indentation variant
-if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {')) {
-  const androidBlockRegex1Space = /android\s*\{\s*\n\s*\/\/ Remove this if[^]*?if \(!safeExtGet\("expoProvidesDefaultConfig", false\)\)\s*\{\s*\n\s*compileSdkVersion[^]*?singleVariant\("release"\)[^]*?withSourcesJar\(\)\s*\n\s*\}\s*\n\s*\n\s*lintOptions\s*\{[^]*?abortOnError false\s*\n\s*\}\s*\n\s*\}\s*\n\s*\}/;
-  content = content.replace(androidBlockRegex1Space, `android {
+    defaultConfig {
+      minSdkVersion safeExtGet("minSdkVersion", 23)
+      targetSdkVersion safeExtGet("targetSdkVersion", 34)
+    }
+
+    publishing {
+      singleVariant("release") {
+        withSourcesJar()
+      }
+    }
+
+    lintOptions {
+      abortOnError false
+    }
+  }
+
+  if (rootProject.hasProperty("ndkPath"))`;
+  const newAndroidBlock = `android {
   compileSdkVersion safeExtGet("compileSdkVersion", 34)
   publishing {
     singleVariant("release") {
@@ -107,7 +108,11 @@ if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n
       abortOnError false
     }
   }
-`);
+
+  if (rootProject.hasProperty("ndkPath"))`;
+  if (content.includes(oldAndroidBlock)) {
+    content = content.replace(oldAndroidBlock, newAndroidBlock);
+  }
 }
 
 // 4) defaultConfig: ensure minSdkVersion and targetSdkVersion exist (in case they're only in the nested if)
