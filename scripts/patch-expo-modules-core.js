@@ -209,6 +209,36 @@ if (fs.existsSync(permissionsServicePath)) {
   }
 }
 
+// 6) Fix Android 10 crash in react-native-gesture-handler (JDK 21 List.reversed() method not available on older Android runtimes).
+// When built/compiled against newer Java stdlib, `list.reversed()` resolves to java.util.List#reversed(), which crashes at runtime on API 29.
+// Use Kotlin's `asReversed()` instead.
+const rnghOrchestratorPath = path.join(
+  __dirname,
+  '..',
+  'node_modules',
+  'react-native-gesture-handler',
+  'android',
+  'src',
+  'main',
+  'java',
+  'com',
+  'swmansion',
+  'gesturehandler',
+  'core',
+  'GestureHandlerOrchestrator.kt'
+);
+
+if (fs.existsSync(rnghOrchestratorPath)) {
+  let rnghContent = fs.readFileSync(rnghOrchestratorPath, 'utf8');
+  const before = rnghContent;
+  rnghContent = rnghContent.replace(/awaitingHandlers\.reversed\(\)/g, 'awaitingHandlers.asReversed()');
+  rnghContent = rnghContent.replace(/gestureHandlers\.reversed\(\)/g, 'gestureHandlers.asReversed()');
+  if (rnghContent !== before) {
+    fs.writeFileSync(rnghOrchestratorPath, rnghContent);
+    console.log('patch-expo-modules-core: fixed RNGH reversed() for Android < 15');
+  }
+}
+
 fs.writeFileSync(buildGradlePath, content);
 
 const hasGoogle = content.includes('google()');
