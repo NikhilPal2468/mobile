@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Switch, Alert } fr
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import FieldLabel from '../FieldLabel';
 import { step9Schema } from '../../validation/schemas';
 
 interface Step9FormProps {
@@ -41,93 +42,61 @@ const Step9Form: React.FC<Step9FormProps> = ({ onSubmit, initialData }) => {
     'Scouts & Guides',
   ];
 
+  const GRADES = ['A', 'B', 'C', 'D', 'E'] as const;
+  const fairs = [
+    { key: 'scienceFairCounts', label: t('form.step9.fair.science', 'Science Fair') },
+    { key: 'mathsFairCounts', label: t('form.step9.fair.maths', 'Maths Fair') },
+    { key: 'itFairCounts', label: t('form.step9.fair.it', 'IT Fair') },
+    { key: 'workExperienceCounts', label: t('form.step9.fair.workExperience', 'Work Experience') },
+    { key: 'socialScienceFairCounts', label: t('form.step9.fair.socialScience', 'Social Science Fair') },
+  ] as const;
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{t('form.step9.title')}</Text>
 
-      <Controller
-        control={control}
-        name="scienceFairGrade"
-        render={({ field: { onChange, value } }) => (
-          <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step9.scienceFairGrade')}</Text>
-            <TextInput
-              style={styles.input}
-              value={value || ''}
-              onChangeText={(text) => {
-                const cleaned = text.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-                onChange(cleaned);
-              }}
-              placeholder="Enter Grade (e.g., A, B, C)"
-              maxLength={2}
-              autoCapitalize="characters"
-            />
+      <View style={styles.field}>
+        <FieldLabel
+          label={t('form.step9.fairGrades', 'Fair grades')}
+          helperText={t('form.step9.fairGradesHelp', '')}
+        />
+        <View style={styles.grid}>
+          <View style={styles.gridHeaderRow}>
+            <Text style={[styles.gridHeaderCell, styles.gridFairHeaderCell]} />
+            {GRADES.map((g) => (
+              <Text key={g} style={styles.gridHeaderCell}>
+                {g}
+              </Text>
+            ))}
           </View>
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="mathsFairGrade"
-        render={({ field: { onChange, value } }) => (
-          <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step9.mathsFairGrade')}</Text>
-            <TextInput
-              style={styles.input}
-              value={value || ''}
-              onChangeText={(text) => {
-                const cleaned = text.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-                onChange(cleaned);
-              }}
-              placeholder="Enter Grade (e.g., A, B, C)"
-              maxLength={2}
-              autoCapitalize="characters"
-            />
-          </View>
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="itFairGrade"
-        render={({ field: { onChange, value } }) => (
-          <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step9.itFairGrade')}</Text>
-            <TextInput
-              style={styles.input}
-              value={value || ''}
-              onChangeText={(text) => {
-                const cleaned = text.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-                onChange(cleaned);
-              }}
-              placeholder="Enter Grade (e.g., A, B, C)"
-              maxLength={2}
-              autoCapitalize="characters"
-            />
-          </View>
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="workExperienceGrade"
-        render={({ field: { onChange, value } }) => (
-          <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step9.workExperienceGrade')}</Text>
-            <TextInput
-              style={styles.input}
-              value={value || ''}
-              onChangeText={(text) => {
-                const cleaned = text.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-                onChange(cleaned);
-              }}
-              placeholder="Enter Grade (e.g., A, B, C)"
-              maxLength={2}
-              autoCapitalize="characters"
-            />
-          </View>
-        )}
-      />
+          {fairs.map((fair) => (
+            <View key={fair.key} style={styles.gridRow}>
+              <Text style={styles.gridFairCell}>{fair.label}</Text>
+              {GRADES.map((g) => (
+                <Controller
+                  key={`${fair.key}.${g}`}
+                  control={control}
+                  name={`${fair.key}.${g}` as any}
+                  render={({ field: { onChange, value } }) => (
+                    <TextInput
+                      style={styles.gridInput}
+                      value={value == null ? '' : String(value)}
+                      onChangeText={(text) => {
+                        const cleaned = text.replace(/\D/g, '').slice(0, 2);
+                        onChange(cleaned === '' ? null : parseInt(cleaned, 10));
+                      }}
+                      keyboardType="number-pad"
+                      maxLength={2}
+                      placeholder="0"
+                      placeholderTextColor="#999"
+                    />
+                  )}
+                />
+              ))}
+            </View>
+          ))}
+        </View>
+      </View>
 
       <Controller
         control={control}
@@ -143,10 +112,7 @@ const Step9Form: React.FC<Step9FormProps> = ({ onSubmit, initialData }) => {
           };
           return (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step9.clubs')}</Text>
-              <Text style={styles.hint}>
-                {t('form.step9.clubs')}
-              </Text>
+              <FieldLabel label={t('form.step9.clubs')} helperText={t('form.step9.clubsHelp', '')} />
               {clubs.map((club) => (
                 <View key={club} style={styles.clubRow}>
                   <Text style={styles.clubLabel}>{club}</Text>
@@ -219,6 +185,51 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
+  },
+  grid: {
+    borderWidth: 1,
+    borderColor: '#E5E5EA',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  gridHeaderRow: {
+    flexDirection: 'row',
+    backgroundColor: '#F2F2F7',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#E5E5EA',
+  },
+  gridHeaderCell: {
+    width: 44,
+    paddingVertical: 10,
+    textAlign: 'center',
+    fontWeight: '700',
+    color: '#333',
+  },
+  gridFairHeaderCell: {
+    width: 140,
+  },
+  gridRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#E5E5EA',
+  },
+  gridFairCell: {
+    width: 140,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+    fontSize: 13,
+    color: '#333',
+  },
+  gridInput: {
+    width: 44,
+    height: 44,
+    textAlign: 'center',
+    borderLeftWidth: StyleSheet.hairlineWidth,
+    borderLeftColor: '#E5E5EA',
+    fontSize: 14,
+    color: '#111',
+    backgroundColor: '#fff',
   },
   buttonContainer: {
     marginTop: 20,

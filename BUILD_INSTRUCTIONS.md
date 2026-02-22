@@ -67,6 +67,72 @@ When running the app on a **physical device** or **simulator**, API calls (inclu
 - Make sure you're using a development build, not Expo Go
 - Run `npx expo prebuild --clean` to regenerate native folders
 
+---
+
+# Building Android AAB for Play Console
+
+The app uses **application ID** `com.rzwan.helpdesk` (aligned with `app.json`). Use one of the options below to produce a signed AAB for upload to Google Play.
+
+## Option A: EAS Build (recommended)
+
+1. **Prerequisites:** Expo account, EAS CLI (`npm install -g eas-cli`), and `eas login`.
+2. **Build AAB:**
+   ```bash
+   cd mobile
+   eas build --platform android --profile production
+   ```
+3. On first run, choose to let EAS **generate and store** a new Android keystore, or upload your own. Back up the keystore from [Expo dashboard](https://expo.dev) → project → Credentials → Android if EAS generates it.
+4. **Download the AAB** from the build page when the build finishes.
+5. **Production API URL:** Set `EXPO_PUBLIC_API_URL` in EAS secrets (or in `.env` before building) so the production build uses your live backend.
+
+Optional: submit from the CLI with `eas submit --platform android --profile production` (edit `eas.json` → `submit.production.android.track` to `internal`, `alpha`, `beta`, or `production` as needed).
+
+## Option B: Local AAB build
+
+1. **Create a release keystore** (one-time):
+   ```bash
+   keytool -genkeypair -v -storetype PKCS12 -keystore mobile/android/app/release.keystore -alias release -keyalg RSA -keysize 2048 -validity 10000
+   ```
+   Store the keystore and passwords securely; keep the same keystore for all future Play updates.
+
+2. **Configure signing:** In `android/gradle.properties` (or a local file not committed), set:
+   ```properties
+   MYAPP_RELEASE_STORE_FILE=release.keystore
+   MYAPP_RELEASE_STORE_PASSWORD=your_store_password
+   MYAPP_RELEASE_KEY_ALIAS=release
+   MYAPP_RELEASE_KEY_PASSWORD=your_key_password
+   ```
+   Do not commit real passwords. The keystore file lives in `android/app/` and is gitignored (`.keystore`).
+
+3. **Build the AAB:** Use JDK 17 (see `android/gradle.properties`). From project root:
+   ```bash
+   cd mobile/android
+   JAVA_HOME=$(/usr/libexec/java_home -v 17) ./gradlew bundleRelease
+   ```
+   Output: `mobile/android/app/build/outputs/bundle/release/app-release.aab`.
+
+4. **Upload** this file in Play Console (see below).
+
+## Building release APK (sideloading / testers)
+
+To build a signed **APK** (for sideloading, direct install, or sharing with testers outside Play):
+
+```bash
+cd mobile
+npm run build:apk
+```
+
+Output: `mobile/android/app/build/outputs/apk/release/app-release.apk`. Install on a device via USB (`adb install app-release.apk`) or share the file. Uses the same keystore and signing as the local AAB build.
+
+## Upload in Play Console
+
+1. In [Google Play Console](https://play.google.com/console), create an app (if needed) with application ID **com.rzwan.helpdesk**.
+2. **Release** → choose track (e.g. Internal testing, Production) → **Create new release** → upload the `.aab`.
+3. Complete required setup (store listing, content rating, privacy policy, target audience, etc.) and submit for review.
+4. For later releases: bump `versionCode` (and optionally `versionName`) in `android/app/build.gradle`, then build a new AAB and upload as a new release.
+
+---
+
 ## Next Steps
 
 1. **Test the app** - Run it on a simulator or device

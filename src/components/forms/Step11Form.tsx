@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Icon from '../Icon';
+import FieldLabel from '../FieldLabel';
 import { step11Schema } from '../../validation/schemas';
 // Razorpay requires development build - conditionally import
 let RazorpayCheckout: any = null;
@@ -233,7 +234,10 @@ const Step11Form: React.FC<Step11FormProps> = ({ onSubmit, initialData, onSubmit
             </View>
 
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step11.schoolCode')}</Text>
+              <FieldLabel
+                label={t('form.step11.schoolCode')}
+                helperText={t('form.step11.schoolCodeHelp', '')}
+              />
               <TextInput
                 style={styles.input}
                 value={pref.schoolCode}
@@ -246,7 +250,10 @@ const Step11Form: React.FC<Step11FormProps> = ({ onSubmit, initialData, onSubmit
             </View>
 
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step11.combinationCode')}</Text>
+              <FieldLabel
+                label={t('form.step11.combinationCode')}
+                helperText={t('form.step11.combinationCodeHelp', '')}
+              />
               <TextInput
                 style={styles.input}
                 value={pref.combinationCode}

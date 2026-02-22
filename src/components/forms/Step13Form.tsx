@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
 import { step13Schema } from '../../validation/schemas';
+import FieldLabel from '../FieldLabel';
 // Razorpay requires development build - conditionally import
 let RazorpayCheckout: any = null;
 try {
@@ -159,15 +160,24 @@ const Step13Form: React.FC<Step13FormProps> = ({ onSubmit, initialData }) => {
             control={control}
             name="disclaimerAccepted"
             render={({ field: { onChange, value } }) => (
-              <View style={styles.disclaimerRow}>
-                <Switch
-                  value={value || false}
-                  onValueChange={onChange}
-                  trackColor={{ false: '#ddd', true: '#007AFF' }}
-                  thumbColor={value ? '#fff' : '#f4f3f4'}
-                />
+              <>
+                <View style={styles.switchRow}>
+                  <View style={styles.switchLabel}>
+                    <FieldLabel
+                      label={t('form.step13.acceptDisclaimer')}
+                      helperText={t('form.step13.acceptDisclaimerHelp', '')}
+                      containerStyle={{ marginBottom: 0 }}
+                    />
+                  </View>
+                  <Switch
+                    value={value || false}
+                    onValueChange={onChange}
+                    trackColor={{ false: '#ddd', true: '#007AFF' }}
+                    thumbColor={value ? '#fff' : '#f4f3f4'}
+                  />
+                </View>
                 <Text style={styles.disclaimerText}>{t('form.step13.disclaimer')}</Text>
-              </View>
+              </>
             )}
           />
         </View>
@@ -245,6 +255,15 @@ const styles = StyleSheet.create({
   disclaimerRow: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  switchRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  switchLabel: {
+    flex: 1,
+    paddingRight: 12,
   },
   disclaimerText: {
     flex: 1,

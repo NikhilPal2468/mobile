@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'reac
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import FieldLabel from '../FieldLabel';
 import { step6Schema } from '../../validation/schemas';
 
 interface Step6FormProps {
@@ -33,7 +34,7 @@ const Step6Form: React.FC<Step6FormProps> = ({ onSubmit, initialData }) => {
         name="sportsStateCount"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step6.stateCount')}</Text>
+            <FieldLabel label={t('form.step6.stateCount')} helperText={t('form.step6.stateCountHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -54,7 +55,7 @@ const Step6Form: React.FC<Step6FormProps> = ({ onSubmit, initialData }) => {
         name="sportsDistrictFirst"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step6.districtFirst')}</Text>
+            <FieldLabel label={t('form.step6.districtFirst')} helperText={t('form.step6.districtFirstHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -75,7 +76,7 @@ const Step6Form: React.FC<Step6FormProps> = ({ onSubmit, initialData }) => {
         name="sportsDistrictSecond"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step6.districtSecond')}</Text>
+            <FieldLabel label={t('form.step6.districtSecond')} helperText={t('form.step6.districtSecondHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -96,7 +97,7 @@ const Step6Form: React.FC<Step6FormProps> = ({ onSubmit, initialData }) => {
         name="sportsDistrictThird"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step6.districtThird')}</Text>
+            <FieldLabel label={t('form.step6.districtThird')} helperText={t('form.step6.districtThirdHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -117,7 +118,7 @@ const Step6Form: React.FC<Step6FormProps> = ({ onSubmit, initialData }) => {
         name="sportsDistrictParticipation"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step6.districtParticipation')}</Text>
+            <FieldLabel label={t('form.step6.districtParticipation')} helperText={t('form.step6.districtParticipationHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}

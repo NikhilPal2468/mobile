@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import SelectModal from '../SelectModal';
+import FieldLabel from '../FieldLabel';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
 import { step1Schema } from '../../validation/schemas';
@@ -52,7 +53,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
         name="examCode"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step1.examCode')}</Text>
+            <FieldLabel
+              label={t('form.step1.examCode')}
+              helperText={t('form.step1.examCodeHelp', '')}
+            />
             <TextInput
               style={[styles.input, errors.examCode && styles.inputError]}
               value={value}
@@ -71,7 +75,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
         name="examName"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step1.examName')}</Text>
+            <FieldLabel
+              label={t('form.step1.examName')}
+              helperText={t('form.step1.examNameHelp', '')}
+            />
             <TouchableOpacity
               style={styles.selectTouchable}
               onPress={() => setExamNameModalVisible(true)}
@@ -98,7 +105,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
           name="examNameOther"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step1.examName')}</Text>
+              <FieldLabel
+                label={t('form.step1.examName')}
+                helperText={t('form.step1.examNameHelp', '')}
+              />
               <TextInput
                 style={styles.input}
                 value={value}
@@ -115,7 +125,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
         name="registerNumber"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step1.registerNumber')}</Text>
+            <FieldLabel
+              label={t('form.step1.registerNumber')}
+              helperText={t('form.step1.registerNumberHelp', '')}
+            />
             <TextInput
               style={styles.input}
               value={value}
@@ -131,7 +144,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
         name="passingMonth"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step1.passingMonth')}</Text>
+            <FieldLabel
+              label={t('form.step1.passingMonth')}
+              helperText={t('form.step1.passingMonthHelp', '')}
+            />
             <TextInput
               style={styles.input}
               value={value}
@@ -147,7 +163,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
         name="passingYear"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step1.passingYear')}</Text>
+            <FieldLabel
+              label={t('form.step1.passingYear')}
+              helperText={t('form.step1.passingYearHelp', '')}
+            />
             <TextInput
               style={styles.input}
               value={value}
@@ -164,7 +183,12 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
         name="schoolCode"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step1.schoolCode')}</Text>
+            <FieldLabel
+              label={t('form.step1.schoolCode')}
+              helperText={t('form.step1.schoolCodeHelp', '')}
+              infoTitle={t('form.step1.schoolCodeInfoTitle', '')}
+              infoBody={t('form.step1.schoolCodeInfoBody', '')}
+            />
             <TextInput
               style={styles.input}
               value={value}
@@ -180,7 +204,10 @@ const Step1Form: React.FC<Step1FormProps> = ({ onSubmit, initialData }) => {
         name="schoolName"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step1.schoolName')}</Text>
+            <FieldLabel
+              label={t('form.step1.schoolName')}
+              helperText={t('form.step1.schoolNameHelp', '')}
+            />
             <TextInput
               style={styles.input}
               value={value}

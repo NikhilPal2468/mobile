@@ -31,9 +31,6 @@ const hasKalolsavamParticipation = (d: any) =>
 const hasScholarship = (d: any) =>
   d?.ntse === true || d?.nmms === true || d?.uss === true || d?.lss === true;
 
-const hasReservationOrEws = (d: any) =>
-  d?.ews === true || hasValue(d?.category) || hasValue(d?.categoryCode);
-
 export const DOCUMENT_RULES: DocumentRule[] = [
   {
     type: 'AADHAAR',
@@ -48,21 +45,6 @@ export const DOCUMENT_RULES: DocumentRule[] = [
     alwaysRequired: true,
     isRequired: () => true,
     getHelpTextKey: () => null,
-  },
-  {
-    type: 'CATEGORY_CERTIFICATE',
-    labelKey: 'form.step12.categoryCertificate',
-    alwaysRequired: false,
-    isRequired: (d) => hasValue(d?.category) || hasValue(d?.categoryCode),
-    getHelpTextKey: (d) =>
-      hasValue(d?.category) || hasValue(d?.categoryCode) ? 'form.step12.requiredBecauseCategory' : null,
-  },
-  {
-    type: 'RESERVATION_CERTIFICATE',
-    labelKey: 'form.step12.reservationCertificate',
-    alwaysRequired: false,
-    isRequired: hasReservationOrEws,
-    getHelpTextKey: (d) => (hasReservationOrEws(d) ? 'form.step12.requiredBecauseReservation' : null),
   },
   {
     type: 'SPORTS_CERTIFICATE',

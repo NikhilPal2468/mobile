@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import SelectModal from '../SelectModal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import FieldLabel from '../FieldLabel';
 import { step10Schema } from '../../validation/schemas';
 
 interface Step10FormProps {
@@ -32,7 +33,18 @@ const Step10Form: React.FC<Step10FormProps> = ({ onSubmit, initialData }) => {
     }
   );
 
-  const subjects = ['English', 'Malayalam', 'Hindi', 'Mathematics', 'Science', 'Social Science'];
+  const subjects = [
+    { id: 'LangI', label: t('form.step10.subject.langI', 'Lang I (Language I)') },
+    { id: 'LangII', label: t('form.step10.subject.langII', 'Lang II (Language II)') },
+    { id: 'Eng', label: t('form.step10.subject.eng', 'Eng (English)') },
+    { id: 'Hin', label: t('form.step10.subject.hin', 'Hin (Hindi)') },
+    { id: 'SS', label: t('form.step10.subject.ss', 'SS (Social Studies)') },
+    { id: 'Phy', label: t('form.step10.subject.phy', 'Phy (Physics)') },
+    { id: 'Che', label: t('form.step10.subject.che', 'Che (Chemistry)') },
+    { id: 'Bio', label: t('form.step10.subject.bio', 'Bio (Biology)') },
+    { id: 'Maths', label: t('form.step10.subject.maths', 'Maths (Mathematics)') },
+    { id: 'IT', label: t('form.step10.subject.it', 'IT (Information Technology)') },
+  ] as const;
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -46,7 +58,10 @@ const Step10Form: React.FC<Step10FormProps> = ({ onSubmit, initialData }) => {
             const numValue = value ?? attempts;
             return (
               <View style={styles.field}>
-                <Text style={styles.label}>{t('form.step10.attempts')}</Text>
+                <FieldLabel
+                  label={t('form.step10.attempts')}
+                  helperText={t('form.step10.attemptsHelp', '')}
+                />
                 <TouchableOpacity
                   style={styles.selectTouchable}
                   onPress={() => setAttemptsModalVisible(true)}
@@ -74,7 +89,10 @@ const Step10Form: React.FC<Step10FormProps> = ({ onSubmit, initialData }) => {
 
         {attempts >= 1 && (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step10.previousAttempts')}</Text>
+            <FieldLabel
+              label={t('form.step10.previousAttempts')}
+              helperText={t('form.step10.previousAttemptsHelp', '')}
+            />
             {Array.from({ length: attempts }).map((_, index) => (
               <View key={index} style={styles.previousAttemptRow}>
                 <Text style={styles.hint}>
@@ -123,15 +141,18 @@ const Step10Form: React.FC<Step10FormProps> = ({ onSubmit, initialData }) => {
         )}
 
         <View style={styles.field}>
-          <Text style={styles.label}>{t('form.step10.subjectGrades')}</Text>
+          <FieldLabel
+            label={t('form.step10.subjectGrades')}
+            helperText={t('form.step10.subjectGradesHelp', '')}
+          />
           {subjects.map((subject) => (
             <Controller
-              key={subject}
+              key={subject.id}
               control={control}
-              name={`subjectGrade_${subject}`}
+              name={`subjectGrade_${subject.id}` as any}
               render={({ field: { onChange, value } }) => (
                 <View style={styles.subjectRow}>
-                  <Text style={styles.subjectLabel}>{subject}</Text>
+                  <Text style={styles.subjectLabel}>{subject.label}</Text>
                   <TextInput
                     style={[styles.input, styles.gradeInput]}
                     value={value || ''}

@@ -39,14 +39,37 @@ if (!content.includes('google()')) {
   );
 }
 
+// 2a) Update existing API 34 block to API 35
+if (content.includes('rootProject.ext.compileSdkVersion = 34') && !content.includes('rootProject.ext.compileSdkVersion = 35')) {
+  content = content.replace(
+    /rootProject\.ext\.compileSdkVersion = 34/g,
+    'rootProject.ext.compileSdkVersion = 35'
+  );
+  content = content.replace(
+    /rootProject\.ext\.targetSdkVersion = 34/g,
+    'rootProject.ext.targetSdkVersion = 35'
+  );
+}
+
+// 2b) Clean up duplicate blocks and extra closing braces
+if (content.match(/rootProject\.ext\.compileSdkVersion = 34/g) && content.match(/rootProject\.ext\.compileSdkVersion = 35/g)) {
+  // Remove the old API 34 block (keep only API 35)
+  content = content.replace(
+    /\/\/ When used as composite build \(includeBuild\), root has no ext from main project; set defaults so compileSdkVersion etc\. are defined\s*\nif \(!rootProject\.ext\.has\("compileSdkVersion"\)\) \{\s*\n\s*rootProject\.ext\.compileSdkVersion = 34[\s\S]*?rootProject\.ext\.targetSdkVersion = 34\s*\n\}\s*\n\}/g,
+    ''
+  );
+  // Remove any standalone extra closing braces
+  content = content.replace(/\n\s*\}\s*\n\s*\/\/ When used as composite build/g, '\n// When used as composite build');
+}
+
 // 2) After buildscript, add rootProject.ext defaults for composite build
-if (!content.includes('rootProject.ext.compileSdkVersion = 34')) {
+if (!content.includes('rootProject.ext.compileSdkVersion = 35') && !content.includes('rootProject.ext.compileSdkVersion = 34')) {
   const block = `
 // When used as composite build (includeBuild), root has no ext from main project; set defaults so compileSdkVersion etc. are defined
 if (!rootProject.ext.has("compileSdkVersion")) {
-  rootProject.ext.compileSdkVersion = 34
+  rootProject.ext.compileSdkVersion = 35
   rootProject.ext.minSdkVersion = 23
-  rootProject.ext.targetSdkVersion = 34
+  rootProject.ext.targetSdkVersion = 35
 }
 
 def isExpoModulesCoreTests = {`;
@@ -58,7 +81,7 @@ def isExpoModulesCoreTests = {`;
   );
   if (replaced !== content) content = replaced;
   // Fallback: single } before "def"
-  if (!content.includes('rootProject.ext.compileSdkVersion = 34')) {
+  if (!content.includes('rootProject.ext.compileSdkVersion = 35')) {
     const rep2 = content.replace(
       /\}\s*\n\s*def\s+isExpoModulesCoreTests\s*=\s*\{/,
       `}
@@ -68,13 +91,42 @@ def isExpoModulesCoreTests = {`;
   }
 }
 
-// 3) android block: ensure compileSdkVersion and publishing at top (so "release" component exists and compileSdkVersion is set)
-if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {')) {
+// 3a) Already patched with unconditional publishing: wrap in condition and add namespace if missing (for Gradle 8.3+ and namespace fix)
+if (content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  publishing {\n    singleVariant("release")') || content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {\n    singleVariant("release")')) {
+  content = content.replace(
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {\n    singleVariant("release")',
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  namespace "expo.modules"\n  if (!safeExtGet("expoProvidesDefaultConfig", false)) {\n    publishing {\n      singleVariant("release")'
+  );
+  content = content.replace(
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  publishing {\n    singleVariant("release")',
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  namespace "expo.modules"\n  if (!safeExtGet("expoProvidesDefaultConfig", false)) {\n    publishing {\n      singleVariant("release")'
+  );
+  content = content.replace(
+    /(\n    \}\n  \}\n  \/\/ Remove this if and it's contents)/,
+    '\n    }\n    }\n  }\n  // Remove this if and it\'s contents'
+  );
+}
+if ((content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  if (!safeExtGet("expoProvidesDefaultConfig"') || content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  if (!safeExtGet("expoProvidesDefaultConfig"')) && !content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  namespace "expo.modules"') && !content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  namespace "expo.modules"')) {
+  content = content.replace(
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  if (!safeExtGet("expoProvidesDefaultConfig"',
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  namespace "expo.modules"\n  if (!safeExtGet("expoProvidesDefaultConfig"'
+  );
+  content = content.replace(
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  if (!safeExtGet("expoProvidesDefaultConfig"',
+    '  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  namespace "expo.modules"\n  if (!safeExtGet("expoProvidesDefaultConfig"'
+  );
+}
+
+// 3) android block: compileSdkVersion and namespace at top; publishing only when useExpoPublishing() is not used (avoids duplicate singleVariant on Gradle 8.3+)
+if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 35)\n  namespace "expo.modules"') && !content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  namespace "expo.modules"')) {
   const newAndroidBlock = `android {
-  compileSdkVersion safeExtGet("compileSdkVersion", 34)
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
+  compileSdkVersion safeExtGet("compileSdkVersion", 35)
+  namespace "expo.modules"
+  if (!safeExtGet("expoProvidesDefaultConfig", false)) {
+    publishing {
+      singleVariant("release") {
+        withSourcesJar()
+      }
     }
   }
   // Remove this if and it's contents, when support for SDK49 is dropped
@@ -89,11 +141,11 @@ if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n
   const oldAndroidBlock = `android {
   // Remove this if and it's contents, when support for SDK49 is dropped
   if (!safeExtGet("expoProvidesDefaultConfig", false)) {
-    compileSdkVersion safeExtGet("compileSdkVersion", 34)
+    compileSdkVersion safeExtGet("compileSdkVersion", 35)
 
     defaultConfig {
       minSdkVersion safeExtGet("minSdkVersion", 23)
-      targetSdkVersion safeExtGet("targetSdkVersion", 34)
+      targetSdkVersion safeExtGet("targetSdkVersion", 35)
     }
 
     publishing {
@@ -112,7 +164,7 @@ if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n
     content = content.replace(oldAndroidBlock, newAndroidBlock);
   } else {
     // Fallback: regex that allows flexible whitespace (handles EAS/npm unpack differences)
-    const flexRegex = /android\s*\{\s*\n\s*\/\/ Remove this if[\s\S]*?if\s*\(\s*!safeExtGet\s*\(\s*"expoProvidesDefaultConfig"\s*,\s*false\s*\)\s*\)\s*\{\s*\n\s*compileSdkVersion safeExtGet\("compileSdkVersion",\s*34\)[\s\S]*?singleVariant\s*\(\s*"release"\s*\)[\s\S]*?withSourcesJar\s*\(\s*\)[\s\S]*?lintOptions\s*\{[\s\S]*?abortOnError\s+false\s*\n\s*\}\s*\n\s*\}\s*\n\s*if\s*\(\s*rootProject\.hasProperty\s*\(\s*"ndkPath"\s*\)\s*\)/;
+    const flexRegex = /android\s*\{\s*\n\s*\/\/ Remove this if[\s\S]*?if\s*\(\s*!safeExtGet\s*\(\s*"expoProvidesDefaultConfig"\s*,\s*false\s*\)\s*\)\s*\{\s*\n\s*compileSdkVersion safeExtGet\("compileSdkVersion",\s*(?:34|35)\)[\s\S]*?singleVariant\s*\(\s*"release"\s*\)[\s\S]*?withSourcesJar\s*\(\s*\)[\s\S]*?lintOptions\s*\{[\s\S]*?abortOnError\s+false\s*\n\s*\}\s*\n\s*\}\s*\n\s*if\s*\(\s*rootProject\.hasProperty\s*\(\s*"ndkPath"\s*\)\s*\)/;
     content = content.replace(flexRegex, newAndroidBlock);
   }
 }
@@ -121,15 +173,47 @@ if (!content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n
 if (content.includes('namespace "expo.modules"') && !content.includes('minSdkVersion safeExtGet("minSdkVersion", 23)')) {
   content = content.replace(
     /\s+namespace "expo\.modules"\s*\n\s*defaultConfig\s*\{\s*\n\s*consumerProguardFiles/,
-    '  namespace "expo.modules"\n  defaultConfig {\n    minSdkVersion safeExtGet("minSdkVersion", 23)\n    targetSdkVersion safeExtGet("targetSdkVersion", 34)\n    consumerProguardFiles'
+    '  namespace "expo.modules"\n  defaultConfig {\n    minSdkVersion safeExtGet("minSdkVersion", 23)\n    targetSdkVersion safeExtGet("targetSdkVersion", 35)\n    consumerProguardFiles'
   );
+}
+
+// 5) Fix Kotlin null-safety issue in PermissionsService.kt (API 35 compatibility)
+const permissionsServicePath = path.join(
+  __dirname,
+  '..',
+  'node_modules',
+  'expo-modules-core',
+  'android',
+  'src',
+  'main',
+  'java',
+  'expo',
+  'modules',
+  'adapters',
+  'react',
+  'permissions',
+  'PermissionsService.kt'
+);
+
+if (fs.existsSync(permissionsServicePath)) {
+  let permissionsContent = fs.readFileSync(permissionsServicePath, 'utf8');
+  // Fix nullable requestedPermissions access
+  if (permissionsContent.includes('return requestedPermissions.contains(permission)') && 
+      !permissionsContent.includes('return requestedPermissions?.contains(permission)')) {
+    permissionsContent = permissionsContent.replace(
+      /return requestedPermissions\.contains\(permission\)/g,
+      'return requestedPermissions?.contains(permission) ?: false'
+    );
+    fs.writeFileSync(permissionsServicePath, permissionsContent);
+    console.log('patch-expo-modules-core: fixed PermissionsService.kt null-safety');
+  }
 }
 
 fs.writeFileSync(buildGradlePath, content);
 
 const hasGoogle = content.includes('google()');
-const hasRootExt = content.includes('rootProject.ext.compileSdkVersion = 34');
-const hasPublishing = content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)\n  publishing {');
+const hasRootExt = content.includes('rootProject.ext.compileSdkVersion = 35') || content.includes('rootProject.ext.compileSdkVersion = 34');
+const hasPublishing = (content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 35)') || content.includes('  compileSdkVersion safeExtGet("compileSdkVersion", 34)')) && (content.includes('  publishing {') || content.includes('expoProvidesDefaultConfig", false)'));
 if (hasGoogle && hasRootExt && hasPublishing) {
   console.log('patch-expo-modules-core: applied EAS composite-build fixes (google, rootProject.ext, android block)');
 } else {

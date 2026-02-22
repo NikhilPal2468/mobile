@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Switch, Alert } fr
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import FieldLabel from '../FieldLabel';
 import { step5Schema } from '../../validation/schemas';
 
 interface Step5FormProps {
@@ -34,7 +35,13 @@ const Step5Form: React.FC<Step5FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step5.graceMarks')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step5.graceMarks')}
+                  helperText={t('form.step5.graceMarksHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -52,7 +59,13 @@ const Step5Form: React.FC<Step5FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step5.ncc')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step5.ncc')}
+                  helperText={t('form.step5.nccHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -70,7 +83,13 @@ const Step5Form: React.FC<Step5FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step5.scouts')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step5.scouts')}
+                  helperText={t('form.step5.scoutsHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -88,7 +107,13 @@ const Step5Form: React.FC<Step5FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step5.spc')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step5.spc')}
+                  helperText={t('form.step5.spcHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -106,7 +131,13 @@ const Step5Form: React.FC<Step5FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step5.defenceDependent')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step5.defenceDependent')}
+                  helperText={t('form.step5.defenceDependentHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -123,7 +154,10 @@ const Step5Form: React.FC<Step5FormProps> = ({ onSubmit, initialData }) => {
         name="littleKitesGrade"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step5.littleKitesGrade')}</Text>
+            <FieldLabel
+              label={t('form.step5.littleKitesGrade')}
+              helperText={t('form.step5.littleKitesGradeHelp', '')}
+            />
             <TextInput
               style={styles.input}
               value={value || ''}
@@ -176,6 +210,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  switchLabel: {
+    flex: 1,
+    paddingRight: 12,
   },
   input: {
     borderWidth: 1,

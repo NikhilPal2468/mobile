@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'reac
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import FieldLabel from '../FieldLabel';
 import { step7Schema } from '../../validation/schemas';
 
 interface Step7FormProps {
@@ -33,7 +34,7 @@ const Step7Form: React.FC<Step7FormProps> = ({ onSubmit, initialData }) => {
         name="kalolsavamStateCount"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step7.stateCount')}</Text>
+            <FieldLabel label={t('form.step7.stateCount')} helperText={t('form.step7.stateCountHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -54,7 +55,7 @@ const Step7Form: React.FC<Step7FormProps> = ({ onSubmit, initialData }) => {
         name="kalolsavamDistrictA"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step7.districtA')}</Text>
+            <FieldLabel label={t('form.step7.districtA')} helperText={t('form.step7.districtAHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -75,7 +76,7 @@ const Step7Form: React.FC<Step7FormProps> = ({ onSubmit, initialData }) => {
         name="kalolsavamDistrictB"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step7.districtB')}</Text>
+            <FieldLabel label={t('form.step7.districtB')} helperText={t('form.step7.districtBHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -96,7 +97,7 @@ const Step7Form: React.FC<Step7FormProps> = ({ onSubmit, initialData }) => {
         name="kalolsavamDistrictC"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step7.districtC')}</Text>
+            <FieldLabel label={t('form.step7.districtC')} helperText={t('form.step7.districtCHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}
@@ -117,7 +118,7 @@ const Step7Form: React.FC<Step7FormProps> = ({ onSubmit, initialData }) => {
         name="kalolsavamDistrictParticipation"
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
-            <Text style={styles.label}>{t('form.step7.districtParticipation')}</Text>
+            <FieldLabel label={t('form.step7.districtParticipation')} helperText={t('form.step7.districtParticipationHelp', '')} />
             <TextInput
               style={styles.input}
               value={value?.toString() || ''}

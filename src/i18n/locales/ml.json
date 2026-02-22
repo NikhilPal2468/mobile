@@ -13,6 +13,7 @@
     "loading": "ലോഡ് ചെയ്യുന്നു...",
     "error": "പിശക്",
     "success": "വിജയം"
+    ,"done": "ശരി"
   },
   "auth": {
     "phoneNumber": "ഫോൺ നമ്പർ",
@@ -69,82 +70,154 @@
     "step1": {
       "title": "യോഗ്യതാ പരീക്ഷ",
       "examCode": "പരീക്ഷ കോഡ്",
+      "examCodeHelp": "യോഗ്യതാ പരീക്ഷയുടെ കോഡ് നൽകുക.",
       "examName": "പരീക്ഷ പേര്",
+      "examNameHelp": "നിങ്ങൾ പഠിച്ച ബോർഡ്/പരീക്ഷ തിരഞ്ഞെടുക്കുക.",
       "registerNumber": "രജിസ്റ്റർ നമ്പർ",
+      "registerNumberHelp": "ഹാൾടിക്കറ്റിലുള്ള പോലെ രജിസ്റ്റർ നമ്പർ നൽകുക.",
       "passingMonth": "പാസ് ചെയ്ത മാസം",
+      "passingMonthHelp": "പരീക്ഷ പാസ് ചെയ്ത മാസം നൽകുക.",
       "passingYear": "പാസ് ചെയ്ത വർഷം",
+      "passingYearHelp": "പരീക്ഷ പാസ് ചെയ്ത വർഷം നൽകുക.",
       "schoolCode": "സ്കൂൾ കോഡ്",
+      "schoolCodeHelp": "SSLC/സമാന പഠനം നടത്തിയ സ്കൂളിന്റെ കോഡ് നൽകുക.",
+      "schoolCodeInfoTitle": "സ്കൂൾ കോഡ്",
+      "schoolCodeInfoBody": "സാധ്യമെങ്കിൽ ഔദ്യോഗിക സ്കൂൾ കോഡ്/UDISE കോഡ് ഉപയോഗിക്കുക. ഉറപ്പില്ലെങ്കിൽ AI അസിസ്റ്റന്റിനോട് ചോദിച്ച് ഔദ്യോഗിക ലിസ്റ്റിൽ നിന്ന് സ്ഥിരീകരിക്കുക.",
       "schoolName": "സ്കൂൾ പേര്",
+      "schoolNameHelp": "ഔദ്യോഗിക രേഖകളിലുള്ള പോലെ സ്കൂളിന്റെ പേര് നൽകുക.",
       "passedBoardExam": "ബോർഡ് പരീക്ഷ പാസ് ചെയ്തു"
+      ,"passedBoardExamHelp": "ബോർഡ് പരീക്ഷ ഇതിനകം പാസ് ചെയ്തിട്ടുണ്ടെങ്കിൽ ഓൺ ചെയ്യുക."
     },
     "step2": {
       "title": "അപേക്ഷകന്റെ വിവരങ്ങൾ",
       "name": "പേര് (ബ്ലോക്ക് അക്ഷരങ്ങൾ)",
+      "nameHelp": "രേഖകളിലുള്ള പോലെ അപേക്ഷകന്റെ പേര് ബ്ലോക്ക് അക്ഷരങ്ങളിൽ നൽകുക.",
       "aadhaarNumber": "ആധാർ നമ്പർ",
+      "aadhaarNumberHelp": "12 അക്ക ആധാർ നമ്പർ നൽകുക (ഉണ്ടെങ്കിൽ).",
       "gender": "ലിംഗം",
+      "genderHelp": "അപേക്ഷകന്റെ ലിംഗം തിരഞ്ഞെടുക്കുക.",
       "category": "വിഭാഗം",
+      "categoryPlaceholder": "വിഭാഗം തിരഞ്ഞെടുക്കുക",
+      "categoryHelp": "അപേക്ഷകനു ബാധകമായ വിഭാഗം തിരഞ്ഞെടുക്കുക.",
       "categoryCode": "വിഭാഗം കോഡ്",
+      "categoryCodeHelp": "തിരഞ്ഞെടുത്ത വിഭാഗം അടിസ്ഥാനമാക്കി ഇത് സ്വയം പൂരിപ്പിക്കും.",
       "ewsEligible": "EWS യോഗ്യത",
+      "ewsEligibleHelp": "EWS സർട്ടിഫിക്കറ്റ് ഉള്ളപ്പോൾ മാത്രം ഓൺ ചെയ്യുക.",
       "caste": "ജാതി",
+      "casteHelp": "സർട്ടിഫിക്കറ്റിൽ ഉള്ള പോലെ ജാതി/കമ്മ്യൂണിറ്റി നൽകുക (ബാധകമാണെങ്കിൽ).",
       "religion": "മതം",
+      "religionHelp": "രേഖകളിലുള്ള പോലെ മതം നൽകുക (ബാധകമാണെങ്കിൽ).",
       "dateOfBirth": "ജനന തീയതി",
+      "dateOfBirthHelp": "സർട്ടിഫിക്കറ്റിലുള്ള പോലെ ജനന തീയതി നൽകുക.",
+      "dateOfBirthPlaceholder": "തീയതി തിരഞ്ഞെടുക്കുക",
       "motherName": "അമ്മയുടെ പേര്",
+      "motherNameHelp": "രേഖകളിലുള്ള പോലെ അമ്മയുടെ പേര് നൽകുക.",
       "fatherName": "അച്ഛന്റെ പേര്",
+      "fatherNameHelp": "രേഖകളിലുള്ള പോലെ അച്ഛന്റെ പേര് നൽകുക.",
       "guardianName": "അഭിരക്ഷകന്റെ പേര്"
+      ,"guardianNameHelp": "മാതാപിതാക്കൾക്ക് പുറമേ മറ്റെയാൾ അഭിരക്ഷകൻ ആണെങ്കിൽ പേര് നൽകുക."
     },
     "step3": {
       "title": "സംവരണവും പ്രത്യേക വിഭാഗങ്ങളും",
       "oec": "OEC (മറ്റ് യോഗ്യതയുള്ള വിഭാഗം)",
+      "oecHelp": "OEC ബാധകമാണെങ്കിൽ മാത്രം ഓൺ ചെയ്യുക.",
       "linguisticMinority": "ഭാഷാ ന്യൂനപക്ഷം",
+      "linguisticMinorityHelp": "ഭാഷാ ന്യൂനപക്ഷം ബാധകമാണെങ്കിൽ ഓൺ ചെയ്യുക.",
       "linguisticLanguage": "ഭാഷ",
+      "linguisticLanguageHelp": "ഭാഷാ ന്യൂനപക്ഷം തിരഞ്ഞെടുത്താൽ ഭാഷ നൽകുക.",
       "differentlyAbled": "വ്യത്യസ്ത കഴിവുകൾ",
-      "differentlyAbledPercentage": "ശതമാനം"
+      "differentlyAbledHelp": "ബാധകമായ വൈകല്യ തരം(കൾ) തിരഞ്ഞെടുക്കുക.",
+      "differentlyAbledPercentage": "ശതമാനം",
+      "differentlyAbledPercentageHelp": "സർട്ടിഫിക്കറ്റിലുള്ള പോലെ വൈകല്യ ശതമാനം നൽകുക (0–100).",
+      "disability": {
+        "orthopaedic": "ഓർത്തോപീഡിക് വെല്ലുവിളികൾ",
+        "blind": "കാഴ്ചക്കുറവ് (അന്ധത)",
+        "deaf": "ശ്രവണ വൈകല്യം (ബധിരത)",
+        "mental": "മാനസിക / മസ്തിഷ്ക രോഗങ്ങൾ"
+      }
     },
     "step4": {
       "title": "വാസസ്ഥലവും വിലാസവും",
       "nativeState": "സ്വദേശം",
+      "nativeStateHelp": "അപേക്ഷകന്റെ സ്വദേശസംസ്ഥാനം നൽകുക.",
+      "nativeCountry": "രാജ്യം",
+      "nativeCountryHelp": "സ്വദേശം കേരളമല്ലെങ്കിൽ രാജ്യം നൽകുക (ഐച്ഛികം).",
       "nativeDistrict": "സ്വദേശ ജില്ല",
+      "nativeDistrictHelp": "സ്വദേശ ജില്ല നൽകുക (ഐച്ഛികം).",
       "nativeTaluk": "താലൂക്ക്",
+      "nativeTalukHelp": "താലൂക്ക് നൽകുക (ഐച്ഛികം).",
       "nativePanchayat": "പഞ്ചായത്ത്",
+      "nativePanchayatHelp": "പഞ്ചായത്ത്/മുനിസിപ്പാലിറ്റി/കോർപ്പറേഷൻ നൽകുക (ഐച്ഛികം).",
       "permanentAddress": "സ്ഥിര വിലാസം",
+      "permanentAddressHelp": "സ്ഥിര വിലാസം പൂർണ്ണമായി നൽകുക.",
+      "permanentPinCode": "സ്ഥിര വിലാസത്തിന്റെ പിൻകോഡ്",
+      "permanentPinCodeHelp": "സ്ഥിര വിലാസത്തിന്റെ 6 അക്ക പിൻകോഡ് നൽകുക.",
       "communicationAddress": "ആശയവിനിമയ വിലാസം",
+      "communicationAddressHelp": "കത്തുകൾ/വിവരങ്ങൾ ലഭിക്കേണ്ട വിലാസം നൽകുക.",
+      "communicationPinCode": "ആശയവിനിമയ വിലാസത്തിന്റെ പിൻകോഡ്",
+      "communicationPinCodeHelp": "ആശയവിനിമയ വിലാസത്തിന്റെ 6 അക്ക പിൻകോഡ് നൽകുക.",
       "phone": "ഫോൺ",
+      "phoneHelp": "10 അക്ക മൊബൈൽ നമ്പർ നൽകുക.",
       "email": "ഇമെയിൽ"
+      ,"emailHelp": "പ്രവർത്തനക്ഷമമായ ഇമെയിൽ നൽകുക (ഐച്ഛികം)."
     },
     "step5": {
       "title": "ഗ്രേസ് / ബോണസ് മാർക്കുകൾ",
       "graceMarks": "ഗ്രേസ് മാർക്കുകൾ",
+      "graceMarksHelp": "ഗ്രേസ്/ബോണസ് മാർക്ക് ബാധകമാണെങ്കിൽ ഓൺ ചെയ്യുക.",
       "ncc": "NCC",
+      "nccHelp": "NCC പങ്കാളിത്തം/സർട്ടിഫിക്കറ്റ് ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "scouts": "സ്കൗട്ടുകൾ",
+      "scoutsHelp": "സ്കൗട്ട്‌സ്/ഗൈഡ്സ് പങ്കാളിത്തം ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "spc": "SPC",
+      "spcHelp": "SPC പങ്കാളിത്തം ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "defenceDependent": "പ്രതിരോധ ആശ്രിതൻ",
+      "defenceDependentHelp": "പ്രതിരോധ ആശ്രിത വിഭാഗത്തിൽ അർഹത ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "littleKitesGrade": "ലിറ്റിൽ കൈറ്റ്സ് ഗ്രേഡ്"
+      ,"littleKitesGradeHelp": "ലിറ്റിൽ കൈറ്റ്സ് ഗ്രേഡ് നൽകുക (ബാധകമാണെങ്കിൽ)."
     },
     "step6": {
       "title": "കായിക പങ്കാളിത്തം",
       "stateCount": "സംസ്ഥാന തലം എണ്ണം",
+      "stateCountHelp": "സംസ്ഥാനതല കായിക നേട്ടങ്ങളുടെ എണ്ണം നൽകുക.",
       "districtFirst": "ജില്ല 1-ാം സ്ഥാനം",
+      "districtFirstHelp": "ജില്ല 1-ാം സ്ഥാനം നേടിയ എണ്ണം നൽകുക.",
       "districtSecond": "ജില്ല 2-ാം സ്ഥാനം",
+      "districtSecondHelp": "ജില്ല 2-ാം സ്ഥാനം നേടിയ എണ്ണം നൽകുക.",
       "districtThird": "ജില്ല 3-ാം സ്ഥാനം",
+      "districtThirdHelp": "ജില്ല 3-ാം സ്ഥാനം നേടിയ എണ്ണം നൽകുക.",
       "districtParticipation": "ജില്ല പങ്കാളിത്തം",
+      "districtParticipationHelp": "ജില്ലതല പങ്കാളിത്തങ്ങളുടെ എണ്ണം നൽകുക.",
       "certificateUpload": "സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക"
+      ,"certificateUploadHelp": "ബന്ധപ്പെട്ട സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക (ആവശ്യമായാൽ)."
     },
     "step7": {
       "title": "കലോത്സവം",
       "stateCount": "സംസ്ഥാന പങ്കാളിത്തം എണ്ണം",
+      "stateCountHelp": "സംസ്ഥാനതല കലോത്സവ പങ്കാളിത്തങ്ങളുടെ എണ്ണം നൽകുക.",
       "districtA": "ജില്ല ഗ്രേഡ് A",
+      "districtAHelp": "ജില്ല ഗ്രേഡ് A നേടിയ എണ്ണം നൽകുക.",
       "districtB": "ജില്ല ഗ്രേഡ് B",
+      "districtBHelp": "ജില്ല ഗ്രേഡ് B നേടിയ എണ്ണം നൽകുക.",
       "districtC": "ജില്ല ഗ്രേഡ് C",
+      "districtCHelp": "ജില്ല ഗ്രേഡ് C നേടിയ എണ്ണം നൽകുക.",
       "districtParticipation": "ജില്ല പങ്കാളിത്തം",
+      "districtParticipationHelp": "ജില്ലതല പങ്കാളിത്തങ്ങളുടെ എണ്ണം നൽകുക.",
       "certificateUpload": "സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക"
+      ,"certificateUploadHelp": "ബന്ധപ്പെട്ട സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക (ആവശ്യമായാൽ)."
     },
     "step8": {
       "title": "വിദ്യാഭ്യാസ സമ്മാനങ്ങൾ",
       "ntse": "NTSE",
+      "ntseHelp": "NTSE യോഗ്യത ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "nmms": "NMMS",
+      "nmmsHelp": "NMMS യോഗ്യത ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "uss": "USS",
+      "ussHelp": "USS യോഗ്യത ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "lss": "LSS",
+      "lssHelp": "LSS യോഗ്യത ഉണ്ടെങ്കിൽ ഓൺ ചെയ്യുക.",
       "certificateUpload": "സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക"
+      ,"certificateUploadHelp": "ബന്ധപ്പെട്ട സർട്ടിഫിക്കറ്റ് അപ്ലോഡ് ചെയ്യുക (ആവശ്യമായാൽ)."
     },
     "step9": {
       "title": "സഹ-പാഠ്യപ്രവർത്തനങ്ങൾ",
@@ -152,20 +225,48 @@
       "mathsFairGrade": "മാത്ത് ഫെയർ ഗ്രേഡ്",
       "itFairGrade": "IT ഫെയർ ഗ്രേഡ്",
       "workExperienceGrade": "ജോലി അനുഭവം ഗ്രേഡ്",
+      "fairGrades": "ഫെയർ ഗ്രേഡുകൾ",
+      "fairGradesHelp": "ഓരോ ഫെയറിലും നേടിയ A–E ഗ്രേഡുകളുടെ എണ്ണം നൽകുക.",
+      "fair": {
+        "science": "സയൻസ് ഫെയർ",
+        "maths": "മാത്ത് ഫെയർ",
+        "it": "ഐടി ഫെയർ",
+        "workExperience": "വർക്ക്എക്സ്പീരിയൻസ്",
+        "socialScience": "സോഷ്യൽ സയൻസ് ഫെയർ"
+      },
       "clubs": "ക്ലബുകൾ"
+      ,"clubsHelp": "അപേക്ഷകൻ പങ്കെടുത്ത ക്ലബുകൾ/പ്രവർത്തനങ്ങൾ തിരഞ്ഞെടുക്കുക."
     },
     "step10": {
       "title": "SSLC ശ്രമങ്ങളും മാർക്കുകളും",
       "attempts": "ശ്രമങ്ങളുടെ എണ്ണം",
+      "attemptsHelp": "SSLC എത്ര ശ്രമങ്ങൾ നടത്തിയെന്ന് തിരഞ്ഞെടുക്കുക.",
       "previousAttempts": "മുമ്പത്തെ ശ്രമങ്ങൾ",
-      "subjectGrades": "വിഷയ-വിഷയ ഗ്രേഡുകൾ"
+      "previousAttemptsHelp": "മുമ്പത്തെ ഓരോ ശ്രമത്തിന്റെയും വിവരങ്ങൾ നൽകുക (ഉണ്ടെങ്കിൽ).",
+      "subjectGrades": "വിഷയ-വിഷയ ഗ്രേഡുകൾ",
+      "subjectGradesHelp": "മാർക്ക് ഷീറ്റിലുള്ള പോലെ ഓരോ വിഷയത്തിന്റെയും ഗ്രേഡ് നൽകുക.",
+      "subject": {
+        "langI": "Lang I (ഭാഷ I)",
+        "langII": "Lang II (ഭാഷ II)",
+        "eng": "Eng (ഇംഗ്ലീഷ്)",
+        "hin": "Hin (ഹിന്ദി)",
+        "ss": "SS (സോഷ്യൽ സ്റ്റഡീസ്)",
+        "phy": "Phy (ഫിസിക്സ്)",
+        "che": "Che (കെമിസ്ട്രി)",
+        "bio": "Bio (ബയോളജി)",
+        "maths": "Maths (ഗണിതം)",
+        "it": "IT (ഐ.ടി.)"
+      }
     },
     "step11": {
       "title": "സ്കൂളും കോമ്പിനേഷനും പ്രാധാന്യങ്ങൾ",
       "preference": "പ്രാധാന്യം",
       "schoolCode": "സ്കൂൾ കോഡ്",
+      "schoolCodeHelp": "ഈ പ്രാധാന്യത്തിനുള്ള സ്കൂൾ കോഡ് നൽകുക.",
       "combinationCode": "കോമ്പിനേഷൻ കോഡ്",
+      "combinationCodeHelp": "ഈ പ്രാധാന്യത്തിനുള്ള കോമ്പിനേഷൻ/കോഴ്സ് കോഡ് നൽകുക.",
       "addPreference": "പ്രാധാന്യം ചേർക്കുക",
+      "addPreferenceHelp": "മറ്റൊരു പ്രാധാന്യം കൂടി ചേർക്കുക (പരമാവധി പരിധിക്ക് ഉള്ളിൽ).",
       "removePreference": "നീക്കം ചെയ്യുക"
     },
     "step12": {
@@ -179,6 +280,7 @@
       "scholarshipCertificate": "വിദ്യാഭ്യാസ സമ്മാനം സർട്ടിഫിക്കറ്റ്",
       "disabilityCertificate": "വൈകല്യ സർട്ടിഫിക്കറ്റ്",
       "uploadDocument": "പ്രമാണം അപ്ലോഡ് ചെയ്യുക",
+      "uploadDocumentHelp": "പ്രമാണത്തിന്റെ വ്യക്തമായ ഫോട്ടോ അല്ലെങ്കിൽ PDF അപ്ലോഡ് ചെയ്യുക.",
       "requiredBecauseCategory": "നിങ്ങൾ ഒരു വിഭാഗം തിരഞ്ഞെടുത്തതിനാൽ ആവശ്യമാണ്.",
       "requiredBecauseReservation": "EWS അല്ലെങ്കിൽ സംവരണം സൂചിപ്പിച്ചതിനാൽ ആവശ്യമാണ്.",
       "requiredBecauseSports": "കായിക പങ്കാളിത്തം സൂചിപ്പിച്ചതിനാൽ ആവശ്യമാണ്.",
@@ -194,8 +296,11 @@
       "uploadSignature": "ഒപ്പ് അപ്ലോഡ് ചെയ്യുക",
       "disclaimer": "ഈ ആപ്പ് ഫോം പൂരിപ്പിക്കാൻ സഹായിക്കുന്നു എന്ന് ഞാൻ മനസ്സിലാക്കുന്നു; അവസാന പ്രവേശനം HSCAP-നെ ആശ്രയിച്ചിരിക്കുന്നു.",
       "acceptDisclaimer": "ഞാൻ പ്രഖ്യാപനം സ്വീകരിക്കുന്നു",
+      "acceptDisclaimerHelp": "അപേക്ഷ സമർപ്പിക്കാൻ ഇത് നിർബന്ധമാണ്.",
       "previewPDF": "PDF പ്രിവ്യൂ",
+      "previewPDFHelp": "അവസാന സമർപ്പണത്തിനു മുൻപ് PDF പ്രിവ്യൂ പരിശോധിക്കുക.",
       "finalSubmit": "അവസാന സമർപ്പണം"
+      ,"finalSubmitHelp": "പേയ്മെന്റും പ്രഖ്യാപനവും പൂർത്തിയാക്കിയ ശേഷം അപേക്ഷ സമർപ്പിക്കുക."
     }
   },
   "explore": {

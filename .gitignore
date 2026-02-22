@@ -4,6 +4,7 @@ node_modules/
 dist/
 npm-debug.*
 *.jks
+*.keystore
 *.p8
 *.p12
 *.key
@@ -11,3 +12,5 @@ npm-debug.*
 *.orig.*
 web-build/
 .env
+android/keystore.properties
+android/.gradle-user-home

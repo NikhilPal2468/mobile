@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Switch, Alert } from 'react-n
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import FieldLabel from '../FieldLabel';
 import { step8Schema } from '../../validation/schemas';
 
 interface Step8FormProps {
@@ -34,7 +35,13 @@ const Step8Form: React.FC<Step8FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step8.ntse')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step8.ntse')}
+                  helperText={t('form.step8.ntseHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -52,7 +59,13 @@ const Step8Form: React.FC<Step8FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step8.nmms')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step8.nmms')}
+                  helperText={t('form.step8.nmmsHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -70,7 +83,13 @@ const Step8Form: React.FC<Step8FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step8.uss')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step8.uss')}
+                  helperText={t('form.step8.ussHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -88,7 +107,13 @@ const Step8Form: React.FC<Step8FormProps> = ({ onSubmit, initialData }) => {
         render={({ field: { onChange, value } }) => (
           <View style={styles.field}>
             <View style={styles.switchRow}>
-              <Text style={styles.label}>{t('form.step8.lss')}</Text>
+              <View style={styles.switchLabel}>
+                <FieldLabel
+                  label={t('form.step8.lss')}
+                  helperText={t('form.step8.lssHelp', '')}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              </View>
               <Switch
                 value={value || false}
                 onValueChange={onChange}
@@ -137,6 +162,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  switchLabel: {
+    flex: 1,
+    paddingRight: 12,
   },
   buttonContainer: {
     marginTop: 20,

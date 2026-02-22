@@ -1,10 +1,3 @@
-// Patch expo-modules-core for composite build before includeBuild (EAS: node_modules may be cached after postinstall)
-def patchScript = new File(rootDir.parentFile, "scripts/patch-expo-modules-core.js")
-if (patchScript.exists()) {
-  def proc = ["node", patchScript.absolutePath].execute(null, rootDir.parentFile)
-  proc.waitFor()
-}
-
 pluginManagement {
   repositories {
     // Needed for Expo modules Gradle plugin (expo-module-gradle-plugin)
@@ -13,6 +6,13 @@ pluginManagement {
     mavenCentral()
     google()
   }
+}
+
+// Patch expo-modules-core for composite build before includeBuild (EAS: node_modules may be cached after postinstall)
+def patchScript = new File(rootDir.parentFile, "scripts/patch-expo-modules-core.js")
+if (patchScript.exists()) {
+  def proc = ["node", patchScript.absolutePath].execute(null, rootDir.parentFile)
+  proc.waitFor()
 }
 
 rootProject.name = 'School Admission'

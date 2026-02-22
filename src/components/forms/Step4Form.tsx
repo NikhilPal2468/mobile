@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import FieldLabel from '../FieldLabel';
 import { step4Schema } from '../../validation/schemas';
 
 interface Step4FormProps {
@@ -24,6 +25,14 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
     }
   );
 
+  const watchedNativeState = useWatch({
+    control,
+    name: 'nativeState',
+  });
+  const showNativeCountry =
+    String(watchedNativeState ?? '').trim().length > 0 &&
+    String(watchedNativeState ?? '').trim().toLowerCase() !== 'kerala';
+
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
@@ -34,7 +43,10 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
           name="nativeState"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.nativeState')}</Text>
+              <FieldLabel
+                label={t('form.step4.nativeState')}
+                helperText={t('form.step4.nativeStateHelp', '')}
+              />
               <TextInput
                 style={styles.input}
                 value={value}
@@ -45,12 +57,36 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
           )}
         />
 
+        {showNativeCountry && (
+          <Controller
+            control={control}
+            name="nativeCountry"
+            render={({ field: { onChange, value } }) => (
+              <View style={styles.field}>
+                <FieldLabel
+                  label={t('form.step4.nativeCountry')}
+                  helperText={t('form.step4.nativeCountryHelp', '')}
+                />
+                <TextInput
+                  style={styles.input}
+                  value={value}
+                  onChangeText={onChange}
+                  placeholder={t('form.step4.nativeCountry')}
+                />
+              </View>
+            )}
+          />
+        )}
+
         <Controller
           control={control}
           name="nativeDistrict"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.nativeDistrict')}</Text>
+              <FieldLabel
+                label={t('form.step4.nativeDistrict')}
+                helperText={t('form.step4.nativeDistrictHelp', '')}
+              />
               <TextInput
                 style={styles.input}
                 value={value}
@@ -66,7 +102,10 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
           name="nativeTaluk"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.nativeTaluk')}</Text>
+              <FieldLabel
+                label={t('form.step4.nativeTaluk')}
+                helperText={t('form.step4.nativeTalukHelp', '')}
+              />
               <TextInput
                 style={styles.input}
                 value={value}
@@ -82,7 +121,10 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
           name="nativePanchayat"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.nativePanchayat')}</Text>
+              <FieldLabel
+                label={t('form.step4.nativePanchayat')}
+                helperText={t('form.step4.nativePanchayatHelp', '')}
+              />
               <TextInput
                 style={styles.input}
                 value={value}
@@ -98,7 +140,10 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
           name="permanentAddress"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.permanentAddress')}</Text>
+              <FieldLabel
+                label={t('form.step4.permanentAddress')}
+                helperText={t('form.step4.permanentAddressHelp', '')}
+              />
               <TextInput
                 style={[styles.input, styles.textArea]}
                 value={value}
@@ -113,10 +158,37 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
 
         <Controller
           control={control}
+          name="permanentPinCode"
+          render={({ field: { onChange, value } }) => (
+            <View style={styles.field}>
+              <FieldLabel
+                label={t('form.step4.permanentPinCode')}
+                helperText={t('form.step4.permanentPinCodeHelp', '')}
+              />
+              <TextInput
+                style={[styles.input, errors.permanentPinCode && styles.inputError]}
+                value={value}
+                onChangeText={(text) => onChange(text.replace(/\D/g, '').slice(0, 6))}
+                placeholder={t('form.step4.permanentPinCode')}
+                keyboardType="number-pad"
+                maxLength={6}
+              />
+              {errors.permanentPinCode && (
+                <Text style={styles.errorText}>{errors.permanentPinCode.message as string}</Text>
+              )}
+            </View>
+          )}
+        />
+
+        <Controller
+          control={control}
           name="communicationAddress"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.communicationAddress')}</Text>
+              <FieldLabel
+                label={t('form.step4.communicationAddress')}
+                helperText={t('form.step4.communicationAddressHelp', '')}
+              />
               <TextInput
                 style={[styles.input, styles.textArea]}
                 value={value}
@@ -131,10 +203,34 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
 
         <Controller
           control={control}
+          name="communicationPinCode"
+          render={({ field: { onChange, value } }) => (
+            <View style={styles.field}>
+              <FieldLabel
+                label={t('form.step4.communicationPinCode')}
+                helperText={t('form.step4.communicationPinCodeHelp', '')}
+              />
+              <TextInput
+                style={[styles.input, errors.communicationPinCode && styles.inputError]}
+                value={value}
+                onChangeText={(text) => onChange(text.replace(/\D/g, '').slice(0, 6))}
+                placeholder={t('form.step4.communicationPinCode')}
+                keyboardType="number-pad"
+                maxLength={6}
+              />
+              {errors.communicationPinCode && (
+                <Text style={styles.errorText}>{errors.communicationPinCode.message as string}</Text>
+              )}
+            </View>
+          )}
+        />
+
+        <Controller
+          control={control}
           name="phone"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.phone')}</Text>
+              <FieldLabel label={t('form.step4.phone')} helperText={t('form.step4.phoneHelp', '')} />
               <TextInput
                 style={[styles.input, errors.phone && styles.inputError]}
                 value={value}
@@ -155,7 +251,7 @@ const Step4Form: React.FC<Step4FormProps> = ({ onSubmit, initialData }) => {
           name="email"
           render={({ field: { onChange, value } }) => (
             <View style={styles.field}>
-              <Text style={styles.label}>{t('form.step4.email')}</Text>
+              <FieldLabel label={t('form.step4.email')} helperText={t('form.step4.emailHelp', '')} />
               <TextInput
                 style={styles.input}
                 value={value}

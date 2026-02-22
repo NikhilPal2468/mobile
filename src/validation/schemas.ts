@@ -23,6 +23,9 @@ export const step2Schema = z.object({
   gender: z.string().nullish(),
   category: z.string().nullish(),
   categoryCode: z.string().nullish(),
+  guardianName: z.string().nullish(),
+  caste: z.string().nullish(),
+  religion: z.string().nullish(),
   dateOfBirth: z.union([z.string(), z.date(), z.null()]).optional(),
   motherName: z.string().nullish(),
   fatherName: z.string().nullish(),
@@ -41,6 +44,15 @@ export const step2Schema = z.object({
       message: 'Gender must be Male, Female or Others',
       path: ['gender'],
     }
+  )
+  .refine(
+    (data) =>
+      !data.category ||
+      ['General', 'OBC', 'SC', 'ST'].includes(String(data.category)),
+    {
+      message: 'Category must be General, OBC, SC or ST',
+      path: ['category'],
+    }
   );
 
 // Step 3: Special Categories (API may return null)
@@ -49,7 +61,36 @@ export const step3Schema = z.object({
   linguisticMinority: z.boolean().nullish(),
   linguisticLanguage: z.string().nullish(),
   differentlyAbled: z.boolean().nullish(),
+  differentlyAbledTypes: z.array(z.string()).nullish(),
   differentlyAbledPercentage: z.union([z.number(), z.string()]).nullish(),
+}).superRefine((data, ctx) => {
+  const types = data.differentlyAbledTypes || [];
+  const hasTypes = Array.isArray(types) && types.length > 0;
+  const raw = data.differentlyAbledPercentage;
+  const num =
+    raw == null || raw === ''
+      ? null
+      : typeof raw === 'number'
+        ? raw
+        : Number(String(raw));
+
+  if (hasTypes) {
+    if (num == null || Number.isNaN(num)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['differentlyAbledPercentage'],
+        message: 'Percentage is required when differently abled is selected',
+      });
+      return;
+    }
+    if (num < 0 || num > 100) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['differentlyAbledPercentage'],
+        message: 'Percentage must be between 0 and 100',
+      });
+    }
+  }
 });
 
 // Step 4: Residence & Address (API may return null)
@@ -58,14 +99,34 @@ export const step4Schema = z.object({
   nativeDistrict: z.string().nullish(),
   nativeTaluk: z.string().nullish(),
   nativePanchayat: z.string().nullish(),
+  nativeCountry: z.string().nullish(),
   permanentAddress: z.string().nullish(),
+  permanentPinCode: z.string().nullish(),
   communicationAddress: z.string().nullish(),
+  communicationPinCode: z.string().nullish(),
   phone: z.string().nullish(),
   email: z.string().nullish(),
 }).refine(
   (data) => !data.phone || String(data.phone).trim().length === 0 || String(data.phone).length >= 10,
   { message: 'Phone must be at least 10 digits', path: ['phone'] }
-);
+).superRefine((data, ctx) => {
+  const pin1 = String(data.permanentPinCode ?? '').trim();
+  const pin2 = String(data.communicationPinCode ?? '').trim();
+  if (!/^\d{6}$/.test(pin1)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['permanentPinCode'],
+      message: 'Permanent PIN code must be exactly 6 digits',
+    });
+  }
+  if (!/^\d{6}$/.test(pin2)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['communicationPinCode'],
+      message: 'Communication PIN code must be exactly 6 digits',
+    });
+  }
+});
 
 // Step 5: Grace / Bonus Marks (API may return null)
 export const step5Schema = z.object({
@@ -109,6 +170,51 @@ export const step9Schema = z.object({
   mathsFairGrade: z.string().nullish(),
   itFairGrade: z.string().nullish(),
   workExperienceGrade: z.string().nullish(),
+  scienceFairCounts: z
+    .object({
+      A: z.union([z.number(), z.string()]).nullish(),
+      B: z.union([z.number(), z.string()]).nullish(),
+      C: z.union([z.number(), z.string()]).nullish(),
+      D: z.union([z.number(), z.string()]).nullish(),
+      E: z.union([z.number(), z.string()]).nullish(),
+    })
+    .nullish(),
+  mathsFairCounts: z
+    .object({
+      A: z.union([z.number(), z.string()]).nullish(),
+      B: z.union([z.number(), z.string()]).nullish(),
+      C: z.union([z.number(), z.string()]).nullish(),
+      D: z.union([z.number(), z.string()]).nullish(),
+      E: z.union([z.number(), z.string()]).nullish(),
+    })
+    .nullish(),
+  itFairCounts: z
+    .object({
+      A: z.union([z.number(), z.string()]).nullish(),
+      B: z.union([z.number(), z.string()]).nullish(),
+      C: z.union([z.number(), z.string()]).nullish(),
+      D: z.union([z.number(), z.string()]).nullish(),
+      E: z.union([z.number(), z.string()]).nullish(),
+    })
+    .nullish(),
+  workExperienceCounts: z
+    .object({
+      A: z.union([z.number(), z.string()]).nullish(),
+      B: z.union([z.number(), z.string()]).nullish(),
+      C: z.union([z.number(), z.string()]).nullish(),
+      D: z.union([z.number(), z.string()]).nullish(),
+      E: z.union([z.number(), z.string()]).nullish(),
+    })
+    .nullish(),
+  socialScienceFairCounts: z
+    .object({
+      A: z.union([z.number(), z.string()]).nullish(),
+      B: z.union([z.number(), z.string()]).nullish(),
+      C: z.union([z.number(), z.string()]).nullish(),
+      D: z.union([z.number(), z.string()]).nullish(),
+      E: z.union([z.number(), z.string()]).nullish(),
+    })
+    .nullish(),
   clubs: z.union([z.array(z.string()), z.array(z.any())]).nullish(),
 });
 
@@ -124,12 +230,16 @@ export const step10Schema = z.object({
       })
     )
     .nullish(),
-  subjectGrade_English: z.string().nullish(),
-  subjectGrade_Malayalam: z.string().nullish(),
-  subjectGrade_Hindi: z.string().nullish(),
-  subjectGrade_Mathematics: z.string().nullish(),
-  subjectGrade_Science: z.string().nullish(),
-  subjectGrade_SocialScience: z.string().nullish(),
+  subjectGrade_LangI: z.string().nullish(),
+  subjectGrade_LangII: z.string().nullish(),
+  subjectGrade_Eng: z.string().nullish(),
+  subjectGrade_Hin: z.string().nullish(),
+  subjectGrade_SS: z.string().nullish(),
+  subjectGrade_Phy: z.string().nullish(),
+  subjectGrade_Che: z.string().nullish(),
+  subjectGrade_Bio: z.string().nullish(),
+  subjectGrade_Maths: z.string().nullish(),
+  subjectGrade_IT: z.string().nullish(),
 })
   .passthrough()
   .refine(

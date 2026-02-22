@@ -13,6 +13,7 @@
     "loading": "Loading...",
     "error": "Error",
     "success": "Success"
+    ,"done": "Done"
   },
   "auth": {
     "phoneNumber": "Phone Number",
@@ -69,82 +70,154 @@
     "step1": {
       "title": "Qualifying Examination",
       "examCode": "Exam Code",
+      "examCodeHelp": "Enter the code of your qualifying examination.",
       "examName": "Exam Name",
+      "examNameHelp": "Select the board/exam name that you studied under.",
       "registerNumber": "Register Number",
+      "registerNumberHelp": "Enter your register number exactly as on the hall ticket.",
       "passingMonth": "Passing Month",
+      "passingMonthHelp": "Enter the month you passed the examination.",
       "passingYear": "Passing Year",
+      "passingYearHelp": "Enter the year you passed the examination.",
       "schoolCode": "School Code",
+      "schoolCodeHelp": "Enter the code of the school where you studied SSLC/equivalent.",
+      "schoolCodeInfoTitle": "School Code",
+      "schoolCodeInfoBody": "Use the official school code/UDISE code if available. If you are unsure, you can ask the AI assistant to help you find the code and then verify it from the official list.",
       "schoolName": "School Name",
+      "schoolNameHelp": "Enter the full school name (as in official records).",
       "passedBoardExam": "Passed Board Exam"
+      ,"passedBoardExamHelp": "Turn on if you have already passed the board exam."
     },
     "step2": {
       "title": "Applicant Details",
       "name": "Name (Block letters)",
+      "nameHelp": "Enter the applicant’s name in block letters as per records.",
       "aadhaarNumber": "Aadhaar Number",
+      "aadhaarNumberHelp": "Enter 12-digit Aadhaar number (if available).",
       "gender": "Gender",
+      "genderHelp": "Select the applicant’s gender.",
       "category": "Category",
+      "categoryPlaceholder": "Select category",
+      "categoryHelp": "Choose the reservation category applicable to the applicant.",
       "categoryCode": "Category Code",
+      "categoryCodeHelp": "This is filled automatically based on the selected category.",
       "ewsEligible": "EWS Eligible",
+      "ewsEligibleHelp": "Turn on only if you have a valid EWS certificate.",
       "caste": "Caste",
+      "casteHelp": "Enter caste/community name as per certificate (if applicable).",
       "religion": "Religion",
+      "religionHelp": "Enter religion as per records (if applicable).",
       "dateOfBirth": "Date of Birth",
+      "dateOfBirthHelp": "Enter date of birth in the same format as the certificate.",
+      "dateOfBirthPlaceholder": "Select date",
       "motherName": "Mother's Name",
+      "motherNameHelp": "Enter mother’s name as per records.",
       "fatherName": "Father's Name",
+      "fatherNameHelp": "Enter father’s name as per records.",
       "guardianName": "Guardian's Name"
+      ,"guardianNameHelp": "If guardian is different from parents, enter the guardian’s name."
     },
     "step3": {
       "title": "Reservation & Special Categories",
       "oec": "OEC (Other Eligible Category)",
+      "oecHelp": "Turn on only if the applicant belongs to OEC.",
       "linguisticMinority": "Linguistic Minority",
+      "linguisticMinorityHelp": "Turn on if the applicant claims linguistic minority.",
       "linguisticLanguage": "Language",
+      "linguisticLanguageHelp": "If linguistic minority is selected, mention the language.",
       "differentlyAbled": "Differently Abled",
-      "differentlyAbledPercentage": "Percentage"
+      "differentlyAbledHelp": "Select the disability type(s) that apply to the applicant.",
+      "differentlyAbledPercentage": "Percentage",
+      "differentlyAbledPercentageHelp": "Enter the disability percentage as per certificate (0–100).",
+      "disability": {
+        "orthopaedic": "Orthopaedically Challenged",
+        "blind": "Blind",
+        "deaf": "Deaf",
+        "mental": "Mental / Brain Diseases"
+      }
     },
     "step4": {
       "title": "Residence & Address",
       "nativeState": "Native State",
+      "nativeStateHelp": "Enter the applicant’s native state.",
+      "nativeCountry": "Country",
+      "nativeCountryHelp": "If native state is not Kerala, enter the country (optional).",
       "nativeDistrict": "Native District",
+      "nativeDistrictHelp": "Enter native district (optional).",
       "nativeTaluk": "Taluk",
+      "nativeTalukHelp": "Enter native taluk (optional).",
       "nativePanchayat": "Panchayat",
+      "nativePanchayatHelp": "Enter native panchayat/municipality/corporation (optional).",
       "permanentAddress": "Permanent Address",
+      "permanentAddressHelp": "Enter the full permanent address.",
+      "permanentPinCode": "Permanent Address PIN Code",
+      "permanentPinCodeHelp": "Enter the 6-digit PIN code for permanent address.",
       "communicationAddress": "Communication Address",
+      "communicationAddressHelp": "Enter the address for receiving communications.",
+      "communicationPinCode": "Communication Address PIN Code",
+      "communicationPinCodeHelp": "Enter the 6-digit PIN code for communication address.",
       "phone": "Phone",
+      "phoneHelp": "Enter a 10-digit mobile number.",
       "email": "Email"
+      ,"emailHelp": "Enter an active email address (optional)."
     },
     "step5": {
       "title": "Grace / Bonus Marks",
       "graceMarks": "Grace Marks",
+      "graceMarksHelp": "Turn on if grace/bonus marks are applicable.",
       "ncc": "NCC",
+      "nccHelp": "Turn on if you have NCC participation/certificate.",
       "scouts": "Scouts",
+      "scoutsHelp": "Turn on if you have Scouts/Guides participation.",
       "spc": "SPC",
+      "spcHelp": "Turn on if you have SPC participation.",
       "defenceDependent": "Defence Dependent",
+      "defenceDependentHelp": "Turn on if you are eligible under defence dependent category.",
       "littleKitesGrade": "Little Kites Grade"
+      ,"littleKitesGradeHelp": "Enter your Little Kites grade (if applicable)."
     },
     "step6": {
       "title": "Sports Participation",
       "stateCount": "State Level Count",
+      "stateCountHelp": "Enter the number of state-level sports achievements.",
       "districtFirst": "District 1st Place",
+      "districtFirstHelp": "Enter how many district 1st place achievements.",
       "districtSecond": "District 2nd Place",
+      "districtSecondHelp": "Enter how many district 2nd place achievements.",
       "districtThird": "District 3rd Place",
+      "districtThirdHelp": "Enter how many district 3rd place achievements.",
       "districtParticipation": "District Participation",
+      "districtParticipationHelp": "Enter how many district-level participations.",
       "certificateUpload": "Upload Certificate"
+      ,"certificateUploadHelp": "Upload relevant participation certificates (if required)."
     },
     "step7": {
       "title": "Kalolsavam",
       "stateCount": "State Participation Count",
+      "stateCountHelp": "Enter the number of state-level Kalolsavam participations.",
       "districtA": "District Grade A",
+      "districtAHelp": "Enter how many district A grades.",
       "districtB": "District Grade B",
+      "districtBHelp": "Enter how many district B grades.",
       "districtC": "District Grade C",
+      "districtCHelp": "Enter how many district C grades.",
       "districtParticipation": "District Participation",
+      "districtParticipationHelp": "Enter how many district-level participations.",
       "certificateUpload": "Upload Certificate"
+      ,"certificateUploadHelp": "Upload relevant certificates (if required)."
     },
     "step8": {
       "title": "Scholarships",
       "ntse": "NTSE",
+      "ntseHelp": "Turn on if you have NTSE qualification.",
       "nmms": "NMMS",
+      "nmmsHelp": "Turn on if you have NMMS qualification.",
       "uss": "USS",
+      "ussHelp": "Turn on if you have USS qualification.",
       "lss": "LSS",
+      "lssHelp": "Turn on if you have LSS qualification.",
       "certificateUpload": "Upload Certificate"
+      ,"certificateUploadHelp": "Upload scholarship certificates (if required)."
     },
     "step9": {
       "title": "Co-curricular",
@@ -152,20 +225,48 @@
       "mathsFairGrade": "Maths Fair Grade",
       "itFairGrade": "IT Fair Grade",
       "workExperienceGrade": "Work Experience Grade",
+      "fairGrades": "Fair grades",
+      "fairGradesHelp": "Enter the number of A–E grades you won in each fair.",
+      "fair": {
+        "science": "Science Fair",
+        "maths": "Maths Fair",
+        "it": "IT Fair",
+        "workExperience": "Work Experience",
+        "socialScience": "Social Science Fair"
+      },
       "clubs": "Clubs"
+      ,"clubsHelp": "Select clubs/activities in which the applicant participated."
     },
     "step10": {
       "title": "SSLC Attempts & Marks",
       "attempts": "Number of Attempts",
+      "attemptsHelp": "Select how many times you attempted SSLC.",
       "previousAttempts": "Previous Attempts",
-      "subjectGrades": "Subject-wise Grades"
+      "previousAttemptsHelp": "Enter details for each previous attempt (if any).",
+      "subjectGrades": "Subject-wise Grades",
+      "subjectGradesHelp": "Enter the grades for each subject as per marksheet.",
+      "subject": {
+        "langI": "Lang I (Language I)",
+        "langII": "Lang II (Language II)",
+        "eng": "Eng (English)",
+        "hin": "Hin (Hindi)",
+        "ss": "SS (Social Studies)",
+        "phy": "Phy (Physics)",
+        "che": "Che (Chemistry)",
+        "bio": "Bio (Biology)",
+        "maths": "Maths (Mathematics)",
+        "it": "IT (Information Technology)"
+      }
     },
     "step11": {
       "title": "School & Combination Preferences",
       "preference": "Preference",
       "schoolCode": "School Code",
+      "schoolCodeHelp": "Enter the preferred school code for this option.",
       "combinationCode": "Combination Code",
+      "combinationCodeHelp": "Enter the course/combination code for this option.",
       "addPreference": "Add Preference",
+      "addPreferenceHelp": "Add another preference (up to the allowed limit).",
       "removePreference": "Remove"
     },
     "step12": {
@@ -179,6 +280,7 @@
       "scholarshipCertificate": "Scholarship Certificate",
       "disabilityCertificate": "Disability Certificate",
       "uploadDocument": "Upload Document",
+      "uploadDocumentHelp": "Upload a clear photo or PDF of the document.",
       "requiredBecauseCategory": "Required because you selected a category.",
       "requiredBecauseReservation": "Required because you indicated EWS or reservation.",
       "requiredBecauseSports": "Required because you indicated sports participation.",
@@ -194,8 +296,11 @@
       "uploadSignature": "Upload Signature",
       "disclaimer": "I understand that this app assists form filling; final admission depends on HSCAP.",
       "acceptDisclaimer": "I accept the disclaimer",
+      "acceptDisclaimerHelp": "This is required to submit the application.",
       "previewPDF": "Preview PDF",
+      "previewPDFHelp": "Preview the generated application PDF before final submission.",
       "finalSubmit": "Final Submit"
+      ,"finalSubmitHelp": "Submit the application after completing payment and declaration."
     }
   },
   "explore": {

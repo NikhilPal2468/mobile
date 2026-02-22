@@ -3,6 +3,7 @@
     "name": "Helpdesk",
     "slug": "helpdesk",
     "version": "1.0.0",
+    "icon": "./assets/app-icon.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
@@ -16,7 +17,11 @@
       "bundleIdentifier": "com.rzwan.helpdesk"
     },
     "android": {
-      "package": "com.rzwan.helpdesk"
+      "package": "com.rzwan.helpdesk",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/app-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
     },
     "web": {},
     "plugins": [
